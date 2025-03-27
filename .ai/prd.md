@@ -1,20 +1,18 @@
 # Project Requirements Document (PRD) for 10xCards
 
-1. Zwięzły opis projektu i jego celów - Co budujemy i po co?
-
----
+## Zwięzły opis projektu i jego celów - Co budujemy i po co?
 
 10xCards to aplikacja webowa umożliwiająca automatyczne generowanie fiszek przy użyciu sztucznej inteligencji. Celem projektu jest znaczące przyspieszenie i uproszczenie procesu tworzenia fiszek, umożliwiając użytkownikom szybkie przekształcenie wprowadzonego tekstu (kopiuj-wklej) w wysokiej jakości fiszki do nauki.
 
-2. Jasno zdefiniowany problem użytkownika - Jaki ból rozwiązujemy?
-
 ---
+
+## Jasno zdefiniowany problem użytkownika - Jaki ból rozwiązujemy?
 
 Użytkownicy tradycyjnych metod nauki muszą ręcznie tworzyć fiszki, co jest czasochłonne, żmudne i wymaga dużego nakładu pracy przy analizie materiału, wyciąganiu kluczowych informacji oraz formułowaniu pytań i odpowiedzi. Ten proces stanowi barierę wejścia i zniechęca do korzystania z efektywnej metody nauki, jaką jest nauka z fiszek.
 
-3. Wymagania funkcjonalne - Co dokładnie musi robić nasz produkt?
-
 ---
+
+## Wymagania funkcjonalne - Co dokładnie musi robić nasz produkt?
 
 - Umożliwić użytkownikowi wprowadzenie tekstu (kopiuj-wklej).
 - Automatycznie generować fiszki przy użyciu AI na podstawie wprowadzonego tekstu.
@@ -22,9 +20,9 @@ Użytkownicy tradycyjnych metod nauki muszą ręcznie tworzyć fiszki, co jest c
 - Zapewnić podstawowy system nauki z wykorzystaniem wygenerowanych fiszek (sesje powtórkowe).
 - Udostępnić prosty system kont użytkowników do bezpiecznego przechowywania fiszek.
 
-4. Granice projektu - Co wyraźnie NIE wchodzi w zakres?
-
 ---
+
+## Granice projektu - Co wyraźnie NIE wchodzi w zakres?
 
 - Zaawansowane algorytmy powtórek, takie jak SuperMemo-2.
 - Import wielu formatów (PDF, DOCX, itp.); tylko tekst wklejany (kopiuj-wklej) jest wspierany.
@@ -32,9 +30,9 @@ Użytkownicy tradycyjnych metod nauki muszą ręcznie tworzyć fiszki, co jest c
 - Integracje z innymi platformami edukacyjnymi.
 - Aplikacje mobilne; w początkowej wersji dostępna będzie jedynie wersja web.
 
-5. Precyzyjne user stories - Jak użytkownicy będą korzystać z naszego rozwiązania?
-
 ---
+
+## Precyzyjne user stories - Jak użytkownicy będą korzystać z naszego rozwiązania?
 
 US-001: Wprowadzanie tekstu do generowania fiszek
 Title: Wprowadzanie tekstu
@@ -105,9 +103,9 @@ Acceptance Criteria:
 - Tylko zatwierdzone fiszki są zapisywane i dodawane do talii.
 - Użytkownik otrzymuje potwierdzenie zatwierdzenia lub odrzucenia fiszki.
 
-6. Metryki sukcesu - Jak zmierzymy, czy nasze rozwiązanie działa?
-
 ---
+
+## Metryki sukcesu - Jak zmierzymy, czy nasze rozwiązanie działa?
 
 - Użytkownik jest w stanie wygenerować co najmniej 20 fiszek w czasie krótszym niż 5 minut.
 - Minimum 80% wygenerowanych fiszek jest użytecznych bez konieczności wprowadzania poprawek.
