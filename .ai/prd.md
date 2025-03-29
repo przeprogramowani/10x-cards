@@ -1,112 +1,134 @@
-# Project Requirements Document (PRD) for 10xCards
+# Dokument wymagań produktu (PRD) – 10x-cards
 
-## Zwięzły opis projektu i jego celów - Co budujemy i po co?
+## 1. Przegląd produktu
+Projekt 10x-cards ma na celu umożliwienie użytkownikom szybkiego tworzenia i zarządzania zestawami fiszek edukacyjnych. Aplikacja wykorzystuje modele LLM (poprzez API) do generowania sugestii fiszek na podstawie dostarczonego tekstu. Głównym założeniem biznesowym na pierwsze 3 miesiące działania jest pozyskanie grupy 100 aktywnych użytkowników, bez nacisku na monetyzację.
 
-10xCards to aplikacja webowa umożliwiająca automatyczne generowanie fiszek przy użyciu sztucznej inteligencji. Celem projektu jest znaczące przyspieszenie i uproszczenie procesu tworzenia fiszek, umożliwiając użytkownikom szybkie przekształcenie wprowadzonego tekstu (kopiuj-wklej) w wysokiej jakości fiszki do nauki.
+## 2. Problem użytkownika
+Manualne tworzenie wysokiej jakości fiszek wymaga dużych nakładów czasu i wysiłku, co zniechęca do korzystania z efektywnej metody nauki, jaką jest spaced repetition. Celem rozwiązania jest skrócenie czasu potrzebnego na tworzenie odpowiednich pytań i odpowiedzi oraz uproszczenie procesu zarządzania materiałem do nauki.
 
----
+## 3. Wymagania funkcjonalne
+1. Automatyczne generowanie fiszek:
+   - Użytkownik wkleja dowolny tekst (np. fragment podręcznika).
+   - Aplikacja wysyła tekst do modelu LLM za pośrednictwem API.
+   - Model LLM proponuje zestaw fiszek (pytania i odpowiedzi).
+   - Fiszki są przedstawiane użytkownikowi w formie listy z możliwością akceptacji, edycji lub odrzucenia.
 
-## Jasno zdefiniowany problem użytkownika - Jaki ból rozwiązujemy?
+2. Ręczne tworzenie i zarządzanie fiszkami:
+   - Formularz do ręcznego tworzenia fiszek (pytanie i odpowiedź).
+   - Opcje edycji i usuwania istniejących fiszek.
 
-Użytkownicy tradycyjnych metod nauki muszą ręcznie tworzyć fiszki, co jest czasochłonne, żmudne i wymaga dużego nakładu pracy przy analizie materiału, wyciąganiu kluczowych informacji oraz formułowaniu pytań i odpowiedzi. Ten proces stanowi barierę wejścia i zniechęca do korzystania z efektywnej metody nauki, jaką jest nauka z fiszek.
+3. Podstawowy system uwierzytelniania i kont użytkowników:
+   - Rejestracja i logowanie.
+   - Możliwość usunięcia konta i powiązanych fiszek na życzenie.
 
----
+4. Integracja z algorytmem powtórek:
+   - Zapewnienie mechanizmu przypisywania fiszek do harmonogramu powtórek (korzystanie z gotowego algorytmu).
+   - Brak dodatkowych metadanych i zaawansowanych funkcji powiadomień w MVP.
 
-## Wymagania funkcjonalne - Co dokładnie musi robić nasz produkt?
+5. Przechowywanie i skalowalność:
+   - Dane o fiszkach i użytkownikach przechowywane w sposób zapewniający skalowalność i bezpieczeństwo.
 
-- Umożliwić użytkownikowi wprowadzenie tekstu (kopiuj-wklej).
-- Automatycznie generować fiszki przy użyciu AI na podstawie wprowadzonego tekstu.
-- Umożliwić przeglądanie, edycję i zarządzanie wygenerowanymi fiszkami.
-- Zapewnić podstawowy system nauki z wykorzystaniem wygenerowanych fiszek (sesje powtórkowe).
-- Udostępnić prosty system kont użytkowników do bezpiecznego przechowywania fiszek.
+6. Statystyki generowania fiszek:
+   - Zbieranie informacji o tym, ile fiszek zostało wygenerowanych przez AI i ile z nich ostatecznie zaakceptowano.
 
----
+7. Wymagania prawne i ograniczenia:
+   - Dane osobowe użytkowników i fiszek przechowywane zgodnie z RODO.
+   - Prawo do wglądu i usunięcia danych (konto wraz z fiszkami) na wniosek użytkownika.
 
-## Granice projektu - Co wyraźnie NIE wchodzi w zakres?
+## 4. Granice produktu
+1. Poza zakresem MVP:
+   - Zaawansowany, własny algorytm powtórek (korzystamy z gotowego rozwiązania).
+   - Mechanizmy gamifikacji.
+   - Aplikacje mobilne (obecnie tylko wersja web).
+   - Import wielu formatów dokumentów (PDF, DOCX itp.).
+   - Publicznie dostępne API.
+   - Współdzielenie fiszek między użytkownikami.
+   - Rozbudowany system powiadomień.
+   - Zaawansowane wyszukiwanie fiszek po słowach kluczowych.
 
-- Zaawansowane algorytmy powtórek, takie jak SuperMemo-2.
-- Import wielu formatów (PDF, DOCX, itp.); tylko tekst wklejany (kopiuj-wklej) jest wspierany.
-- Współdzielenie zestawów fiszek między użytkownikami.
-- Integracje z innymi platformami edukacyjnymi.
-- Aplikacje mobilne; w początkowej wersji dostępna będzie jedynie wersja web.
+## 5. Historyjki użytkowników
 
----
+ID: US-001
+Tytuł: Rejestracja konta
+Opis: Jako nowy użytkownik chcę się zarejestrować, aby mieć dostęp do własnych fiszek i móc korzystać z generowania fiszek przez AI.
+Kryteria akceptacji:
+- Formularz rejestracyjny zawiera pola na adres e-mail i hasło.
+- Po poprawnym wypełnieniu formularza i weryfikacji danych konto jest aktywowane.
+- Użytkownik otrzymuje potwierdzenie pomyślnej rejestracji i zostaje zalogowany.
 
-## Precyzyjne user stories - Jak użytkownicy będą korzystać z naszego rozwiązania?
+ID: US-002
+Tytuł: Logowanie do aplikacji
+Opis: Jako zarejestrowany użytkownik chcę móc się zalogować, aby mieć dostęp do moich fiszek i historii generowania.
+Kryteria akceptacji:
+- Po podaniu prawidłowych danych logowania użytkownik zostaje przekierowany do widoku generowania fiszek.
+- Błędne dane logowania wyświetlają komunikat o nieprawidłowych danych.
+- Dane dotyczące logowania przechowywane są w bezpieczny sposób.
 
-US-001: Wprowadzanie tekstu do generowania fiszek
-Title: Wprowadzanie tekstu
-Description: Jako użytkownik chcę móc wprowadzić lub wkleić tekst, aby na jego podstawie wygenerować fiszki.
-Acceptance Criteria:
+ID: US-003
+Tytuł: Generowanie fiszek przy użyciu AI
+Opis: Jako zalogowany użytkownik chcę wkleić kawałek tekstu i za pomocą przycisku wygenerować propozycje fiszek, aby zaoszczędzić czas na ręcznym tworzeniu pytań i odpowiedzi.
+Kryteria akceptacji:
+- W widoku generowania fiszek znajduje się pole tekstowe, w którym użytkownik może wkleić swój tekst.
+- Pole tekstowe oczekuje od 1000 do 10 000 znaków.
+- Po kliknięciu przycisku generowania aplikacja komunikuje się z API modelu LLM i wyświetla listę wygenerowanych propozycji fiszek do akceptacji przez użytkownika.
+- W przypadku problemów z API lub braku odpowiedzi modelu użytkownik zobaczy stosowny komunikat o błędzie.
 
-- Pole tekstowe akceptuje przynajmniej 1000 znaków.
-- System weryfikuje, czy tekst został wprowadzony przed rozpoczęciem generowania fiszek.
+ID: US-004
+Tytuł: Przegląd i zatwierdzanie propozycji fiszek
+Opis: Jako zalogowany użytkownik chcę móc przeglądać wygenerowane fiszki i decydować, które z nich chcę dodać do mojego zestawu, aby zachować tylko przydatne pytania i odpowiedzi.
+Kryteria akceptacji:
+- Lista wygenerowanych fiszek jest wyświetlana pod formularzem generowania.
+- Przy każdej fiszce znajduje się przycisk pozwalający na jej zatwierdzenie, edycję lub odrzucenie.
+- Po zatwierdzeniu wybranych fiszek użytkownik może kliknąć przycisk zapisu i dodać je do bazy danych.
 
-US-002: Automatyczne generowanie fiszek
-Title: Generowanie fiszek
-Description: Jako użytkownik chcę, aby system automatycznie generował fiszki przy użyciu AI na podstawie wprowadzonego tekstu, aby szybko otrzymać materiały do nauki.
-Acceptance Criteria:
+ID: US-005
+Tytuł: Edycja fiszek utworzonych ręcznie i generowanych przez AI
+Opis: Jako zalogowany użytkownik chcę edytować stworzone lub wygenerowane fiszki, aby poprawić ewentualne błędy lub dostosować pytania i odpowiedzi do własnych potrzeb.
+Kryteria akceptacji:
+- Istnieje lista istniejących fiszek (zarówno ręcznie tworzonych, jak i zatwierdzonych wygenerowanych).
+- Każdą fiszkę można kliknąć i wejść w tryb edycji.
+- Zmiany są zapisywane w bazie danych po zatwierdzeniu.
 
-- Po przesłaniu tekstu generowane jest co najmniej 20 fiszek w czasie krótszym niż 5 minut.
-- Przynajmniej 80% wygenerowanych fiszek zawiera poprawne pytania i odpowiedzi bez potrzeby edycji.
-- W przypadku niewystarczającej ilości tekstu wyświetlany jest odpowiedni komunikat o błędzie.
+ID: US-006
+Tytuł: Usuwanie fiszek
+Opis: Jako zalogowany użytkownik chcę usuwać zbędne fiszki, aby zachować porządek w moim zestawie.
+Kryteria akceptacji:
+- Przy każdej fiszce na liście (w widoku "Moje fiszki") widoczna jest opcja usunięcia.
+- Po wybraniu usuwania użytkownik musi potwierdzić operację, zanim fiszka zostanie trwale usunięta.
+- Fiszki zostają trwale usunięte z bazy danych po potwierdzeniu.
 
-US-003: Przeglądanie wygenerowanych fiszek
-Title: Przegląd fiszek
-Description: Jako użytkownik chcę móc przeglądać listę wygenerowanych fiszek, aby ocenić ich jakość i przydatność.
-Acceptance Criteria:
+ID: US-007
+Tytuł: Ręczne tworzenie fiszek
+Opis: Jako zalogowany użytkownik chcę ręcznie stworzyć fiszkę (określając pytanie i odpowiedź), aby dodawać własny materiał, który nie pochodzi z automatycznie generowanych treści.
+Kryteria akceptacji:
+- W widoku "Moje fiszki" znajduje się przycisk dodania nowej fiszki.
+- Naciśnięcie przycisku otwiera formularz z polami "Pytanie" i "Odpowiedź".
+- Po zapisaniu nowa fiszka pojawia się na liście.
 
-- Lista fiszek wyświetla pytania i odpowiedzi w czytelny sposób.
-- Użytkownik ma możliwość sortowania lub filtrowania fiszek według wybranych kryteriów (np. czasu generowania).
+ID: US-008
+Tytuł: Integracja z algorytmem powtórek
+Opis: Jako zalogowany użytkownik chcę, aby dodane fiszki były dostępne w harmonogramie powtórek opartym na zewnętrznym algorytmie, aby móc efektywnie się uczyć (spaced repetition).
+Kryteria akceptacji:
+- Aplikacja przekazuje informacje o nowo dodanych lub edytowanych fiszkach do wybranego algorytmu powtórek (zewnętrzny system).
+- Harmonogram powtórek i jego aktualizacje są obsługiwane przez integrację, bez konieczności dodatkowej konfiguracji ze strony użytkownika.
+- Brak powiadomień w MVP.
 
-US-004: Edycja fiszek
-Title: Edycja treści fiszek
-Description: Jako użytkownik chcę mieć możliwość edytowania fiszek, aby poprawić ewentualne błędy lub dostosować treść do moich potrzeb.
-Acceptance Criteria:
+ID: US-009
+Tytuł: Bezpieczny dostęp i autoryzacja
+Opis: Jako zalogowany użytkownik chcę mieć pewność, że moje fiszki nie są dostępne dla innych użytkowników, aby zachować prywatność i bezpieczeństwo danych.
+Kryteria akceptacji:
+- Tylko zalogowany użytkownik może wyświetlać, edytować i usuwać swoje fiszki.
+- Nie ma dostępu do fiszek innych użytkowników ani możliwości współdzielenia.
 
-- Każda fiszka posiada opcję edycji umożliwiającą modyfikację pytania i odpowiedzi.
-- Zmiany są zapisywane i natychmiast widoczne w widoku listy fiszek.
-
-US-005: Usuwanie fiszek
-Title: Usuwanie fiszek
-Description: Jako użytkownik chcę móc usuwać fiszki, które nie są mi potrzebne, w celu utrzymania uporządkowanego zbioru.
-Acceptance Criteria:
-
-- Każda fiszka ma opcję usunięcia.
-- Przed usunięciem wyświetlany jest komunikat potwierdzający akcję usunięcia.
-
-US-006: Podstawowy system nauki
-Title: Sesja nauki
-Description: Jako użytkownik chcę rozpocząć sesję nauki z wykorzystaniem fiszek, aby efektywnie przyswajać wiedzę.
-Acceptance Criteria:
-
-- System umożliwia uruchomienie sesji, w której fiszki są prezentowane pojedynczo.
-- Użytkownik może oznaczać fiszki jako zapamiętane lub wymagające powtórki.
-- Postęp sesji jest monitorowany, a wyniki są wyświetlane po jej zakończeniu.
-
-US-007: Uwierzytelnianie i zarządzanie kontem
-Title: Bezpieczny dostęp do konta
-Description: Jako użytkownik chcę móc zarejestrować się i zalogować do systemu, aby moje fiszki były przechowywane w sposób bezpieczny i były dostępne w przyszłości.
-Acceptance Criteria:
-
-- System umożliwia rejestrację, logowanie i wylogowywanie.
-- Hasła są przechowywane w sposób bezpieczny (np. szyfrowane).
-- W przypadku podania nieprawidłowych danych, wyświetlany jest odpowiedni komunikat o błędzie.
-
-US-008: Zatwierdzanie wygenerowanych fiszek
-Title: Weryfikacja i zatwierdzanie fiszek
-Description: Jako użytkownik chcę mieć możliwość zatwierdzania wygenerowanych fiszek przed ich dodaniem do talii, aby upewnić się, że tylko wysokiej jakości fiszki są zapisywane.
-Acceptance Criteria:
-
-- System wyświetla wygenerowane fiszki w podglądzie przed finalnym dodaniem do talii.
-- Użytkownik może zatwierdzić lub odrzucić każdą fiszkę indywidualnie.
-- Tylko zatwierdzone fiszki są zapisywane i dodawane do talii.
-- Użytkownik otrzymuje potwierdzenie zatwierdzenia lub odrzucenia fiszki.
-
----
-
-## Metryki sukcesu - Jak zmierzymy, czy nasze rozwiązanie działa?
-
-- Użytkownik jest w stanie wygenerować co najmniej 20 fiszek w czasie krótszym niż 5 minut.
-- Minimum 80% wygenerowanych fiszek jest użytecznych bez konieczności wprowadzania poprawek.
-- Opinie użytkowników wskazują, że proces tworzenia fiszek jest co najmniej 3 razy szybszy w porównaniu do tradycyjnych metod.
+## 6. Metryki sukcesu
+1. Aktywni użytkownicy:
+   - Osiągnięcie 100 aktywnych użytkowników w ciągu 3 miesięcy od wdrożenia MVP.
+2. Efektywność generowania fiszek:
+   - 75% wygenerowanych przez AI fiszek jest akceptowanych przez użytkownika.
+   - Użytkownicy tworzą co najmniej 75% fiszek z wykorzystaniem AI (w stosunku do wszystkich nowo dodanych fiszek).
+3. Zaangażowanie:
+   - Monitorowanie liczby wygenerowanych fiszek i porównanie z liczbą zatwierdzonych do analizy jakości i użyteczności.
+4. Stabilność i skalowalność:
+   - Poprawne działanie aplikacji przy rosnącej liczbie użytkowników.
+5. Ocena wydajności integracji:
+   - Brak błędów krytycznych podczas komunikacji z zewnętrznym algorytmem powtórek i API modelu LLM.

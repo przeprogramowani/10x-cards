@@ -1,26 +1,20 @@
-# Wybrany Stack Technologiczny dla 10xCards
+Frontend - Astro z React dla komponentów interaktywnych:
+- Astro 5 pozwala na tworzenie szybkich, wydajnych stron i aplikacji z minimalną ilością JavaScript
+- React 19 zapewni interaktywność tam, gdzie jest potrzebna
+- TypeScript 5 dla statycznego typowania kodu i lepszego wsparcia IDE
+- Tailwind 4 pozwala na wygodne stylowanie aplikacji
+- Shadcn/ui zapewnia bibliotekę dostępnych komponentów React, na których oprzemy UI
 
-## Frontend
+Backend - Supabase jako kompleksowe rozwiązanie backendowe:
+- Zapewnia bazę danych PostgreSQL
+- Zapewnia SDK w wielu językach, które posłużą jako Backend-as-a-Service
+- Jest rozwiązaniem open source, które można hostować lokalnie lub na własnym serwerze
+- Posiada wbudowaną autentykację użytkowników
 
-- **Astro**: Umożliwia tworzenie szybkich, wydajnych stron i aplikacji z minimalną ilością JavaScript.
-- **React**: Zapewnia interaktywność tam, gdzie jest potrzebna.
-- **TypeScript**: Poprawia jakość kodu i wspiera IDE.
+AI - Komunikacja z modelami przez usługę Openrouter.ai:
+- Dostęp do szerokiej gamy modeli (OpenAI, Anthropic, Google i wiele innych), które pozwolą nam znaleźć rozwiązanie zapewniające wysoką efektywność i niskie koszta
+- Pozwala na ustawianie limitów finansowych na klucze API
 
-## Backend
-
-- **Supabase**: Kompleksowe rozwiązanie backendowe:
-  - Baza danych PostgreSQL.
-  - Wbudowany system autentykacji użytkowników.
-  - Przechowywanie plików (Storage).
-  - API do komunikacji z frontendem.
-
-## Sztuczna Inteligencja (AI)
-
-- **Openrouter.ai**: Komunikacja z modelami AI do generowania fiszek:
-  - Dostęp do szerokiej gamy modeli (OpenAI, Anthropic, Google, itp.).
-  - Pozwala zapewnić wysoką efektywność oraz niskie koszty.
-
-## CI/CD i Hosting
-
-- **Github Actions**: Do tworzenia pipeline'ów CI/CD.
-- **DigitalOcean**: Do hostowania aplikacji za pomocą obrazu dockerowego.
+CI/CD i Hosting:
+- Github Actions do tworzenia pipeline’ów CI/CD
+- DigitalOcean do hostowania aplikacji za pośrednictwem obrazu docker
