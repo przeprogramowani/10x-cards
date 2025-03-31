@@ -39,7 +39,8 @@ Title: Wprowadzanie tekstu
 Description: Jako użytkownik chcę móc wprowadzić lub wkleić tekst, aby na jego podstawie wygenerować fiszki.
 Acceptance Criteria:
 
-- Pole tekstowe akceptuje przynajmniej 1000 znaków.
+- Pole tekstowe akceptuje od 1000 do 10 000 znaków.
+- Wprowadzony tekst jest przetwarzany w celu generowania fiszek zawierających pola "front" i "back" oraz metadane łączące fiszkę z kontem użytkownika.
 - System weryfikuje, czy tekst został wprowadzony przed rozpoczęciem generowania fiszek.
 
 US-002: Automatyczne generowanie fiszek
@@ -49,6 +50,8 @@ Acceptance Criteria:
 
 - Po przesłaniu tekstu generowane jest co najmniej 20 fiszek w czasie krótszym niż 5 minut.
 - Przynajmniej 80% wygenerowanych fiszek zawiera poprawne pytania i odpowiedzi bez potrzeby edycji.
+- Proces generowania odbywa się synchronicznie.
+- System zapisuje szczegółowe informacje o procesie generowania: status wykonania, długość inputu, liczba wygenerowanych fiszek, czas odpowiedzi, opcjonalny komunikat błędu, oraz timestamp.
 - W przypadku niewystarczającej ilości tekstu wyświetlany jest odpowiedni komunikat o błędzie.
 
 US-003: Przeglądanie wygenerowanych fiszek
@@ -99,8 +102,8 @@ Description: Jako użytkownik chcę mieć możliwość zatwierdzania wygenerowan
 Acceptance Criteria:
 
 - System wyświetla wygenerowane fiszki w podglądzie przed finalnym dodaniem do talii.
-- Użytkownik może zatwierdzić lub odrzucić każdą fiszkę indywidualnie.
-- Tylko zatwierdzone fiszki są zapisywane i dodawane do talii.
+- Użytkownik ma możliwość edycji zawartości fiszki przed jej zatwierdzeniem.
+- Tylko zatwierdzone fiszki są zapisywane i dodawane do talii (w bazie danych nie przechowujemy statusu, a jedynie finalnie zatwierdzone fiszki).
 - Użytkownik otrzymuje potwierdzenie zatwierdzenia lub odrzucenia fiszki.
 
 ---
@@ -110,3 +113,8 @@ Acceptance Criteria:
 - Użytkownik jest w stanie wygenerować co najmniej 20 fiszek w czasie krótszym niż 5 minut.
 - Minimum 80% wygenerowanych fiszek jest użytecznych bez konieczności wprowadzania poprawek.
 - Opinie użytkowników wskazują, że proces tworzenia fiszek jest co najmniej 3 razy szybszy w porównaniu do tradycyjnych metod.
+
+## Wymagania techniczne i bezpieczeństwo
+
+- Endpointy REST API (/api) muszą być chronione przez Supabase JWT.
+- W początkowej wersji systemu zastosujemy uproszczony mechanizm uwierzytelniania poprzez jednego użytkownika hardcoded, który zostanie później zastąpiony pełnym systemem autoryzacji.
