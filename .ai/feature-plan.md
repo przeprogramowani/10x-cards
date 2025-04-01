@@ -9,7 +9,6 @@
 - user_id: UUID, foreign key referencing the users table (initially a hardcoded single user).
 - front: TEXT, content for the front of the flashcard.
 - back: TEXT, content for the back of the flashcard.
-- metadata: JSON, stores additional information if needed.
 - created_at: TIMESTAMP, auto-generated
 - updated_at: TIMESTAMP, auto-updated
 
@@ -18,7 +17,7 @@
 - input_length: INTEGER, the length of the provided input text.
 - flashcards_count: INTEGER, the number of flashcards generated.
 - flashcards_approved_count: INTEGER (nullable), the number of flashcards approved by the user.
-- status: TEXT, status of the generation process (e.g., 'success' or 'failure').
+- status: ENUM, status of the generation process (e.g., 'success' or 'failure').
 - response_time: INTEGER, time taken by the AI service to respond (in milliseconds).
 - error_message: TEXT (nullable), details of any errors during generation.
 - created_at: TIMESTAMP, timestamp when the record was created.
@@ -32,7 +31,7 @@
 ### Relationships
 
 - Each flashcard is associated with a user via user_id.
-- Each generation log record is associated with a user via user_id.
+- Generation logs are maintained independently as a debugging and monitoring tool, without formal database relationships to other tables.
 
 ## 2. REST API Implementation
 
@@ -44,25 +43,28 @@
   - Content-Type: application/json
   - Body: { "input_text": "string" }
 - **Validations:**
-  - Input text length must be between 1000 and 10000 characters.
+  - Input text length must be between 1000 and 10000 characters. If the input text does not meet these requirements, the system will respond with an HTTP 400 error using one of the following error codes:
+    - "text_too_short" for texts shorter than 1000 characters,
+    - "text_too_long" for texts longer than 10000 characters,
+    - "not_allowed" for disallowed content.
 - **Processing:**
-  - Call the AI service synchronously to generate an array of flashcards with "front" and "back" fields.
-  - Log generation details (status, input_length, flashcards_count, flashcards_approved_count, response_time, error_message, created_at) into the generation_logs table.
+  - Call the AI service synchronously to generate an array of flashcards with "front" and "back" fields. The flashcards will be generated in a "pending" state and kept only in memory.
+  - Enforce a timeout of 3 minutes for the generation process. If the generation exceeds 3 minutes, the system should return a timeout error.
+  - Log basic generation details (status, input_length, flashcards_count, response_time, error_message) into the generation_logs table.
 - **Response:**
-  - { "flashcards": [ { "front": "string", "back": "string" }, ... ], generation_id: "uuid", "created_at": "timestamp" } }
+  - { "flashcards": [ { "front": "string", "back": "string" }, ... ], generation_id: "uuid", "created_at": "timestamp" }
 
 #### POST /api/flashcards
 - **Purpose:** Saves an approved flashcard (or multiple flashcards) to the database after user edits.
 - **Request:**
   - Content-Type: application/json
-  - Body: { "flashcards": [ { "front": "string", "back": "string" }, ... ], generation_id: "uuid" }
+  - Body: { "flashcards": [ { "front": "string", "back": "string" }, ... ] }
 - **Processing:**
   - Validate the flashcards are in the correct format.
-  - Validate the generation_id exists in the generation_logs table.
-  - Save the flashcards to the flashcards table.
-  - Update the generation_logs table with the number of flashcards approved and rejected.
+  - Save only the approved flashcards to the flashcards table.
+  - Update the generation_logs table with the basic count of approved flashcards.
 - **Response:**
-  - The saved flashcard record including its ID and timestamps.
+  - The saved flashcard records including their IDs and timestamps.
 
 ### Security
 
@@ -96,5 +98,7 @@
 
 - The synchronous AI generation approach may affect response times under heavy load; future iterations might consider an asynchronous approach.
 - Hardcoded authentication is a temporary measure; a full authentication system using Supabase auth should be implemented in subsequent phases.
-- Detailed logging in the "generation_logs" table will be valuable for monitoring AI performance and troubleshooting errors.
-- The design balances simplicity with future extensibility, ensuring that core functionalities can be scaled or modified as needed.
+- Generation logs are maintained as a basic diagnostic tool without formal database relationships, prioritizing simplicity over detailed analytics.
+- Pending flashcards are kept in memory only, reducing database complexity while maintaining a clean user experience.
+- The design focuses on core functionality (flashcard creation and persistence) over detailed analytics and metadata tracking.
+- Timeouts and cancellations are treated as simple failures in logs, without complex error tracking mechanisms.

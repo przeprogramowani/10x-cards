@@ -1,6 +1,14 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { API_ERROR } from "../types";
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+export function createErrorResponse(status: number, error: API_ERROR, message?: string) {
+  return new Response(
+    JSON.stringify({
+      error,
+      message: message || error,
+    }),
+    {
+      status,
+      headers: { "Content-Type": "application/json" },
+    }
+  );
 }

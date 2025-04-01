@@ -51,8 +51,10 @@ Acceptance Criteria:
 - Po przesłaniu tekstu generowane jest co najmniej 20 fiszek w czasie krótszym niż 5 minut.
 - Przynajmniej 80% wygenerowanych fiszek zawiera poprawne pytania i odpowiedzi bez potrzeby edycji.
 - Proces generowania odbywa się synchronicznie.
-- System zapisuje szczegółowe informacje o procesie generowania: status wykonania, długość inputu, liczba wygenerowanych fiszek, czas odpowiedzi, opcjonalny komunikat błędu, oraz timestamp.
+- System zapisuje podstawowe informacje o procesie generowania (status, długość inputu, liczba wygenerowanych fiszek, liczba zaakceptowanych fiszek, czas odpowiedzi) do celów diagnostycznych.
 - W przypadku niewystarczającej ilości tekstu wyświetlany jest odpowiedni komunikat o błędzie.
+- Wygenerowane fiszki są przechowywane tymczasowo w pamięci aplikacji do momentu zatwierdzenia.
+- Proces generowania ma limit czasowy 3 minut, po przekroczeniu którego zwracany jest błąd timeout.
 
 US-003: Przeglądanie wygenerowanych fiszek
 Title: Przegląd fiszek
@@ -103,8 +105,9 @@ Acceptance Criteria:
 
 - System wyświetla wygenerowane fiszki w podglądzie przed finalnym dodaniem do talii.
 - Użytkownik ma możliwość edycji zawartości fiszki przed jej zatwierdzeniem.
-- Tylko zatwierdzone fiszki są zapisywane i dodawane do talii (w bazie danych nie przechowujemy statusu, a jedynie finalnie zatwierdzone fiszki).
+- Tylko zatwierdzone fiszki są zapisywane w bazie danych.
 - Użytkownik otrzymuje potwierdzenie zatwierdzenia lub odrzucenia fiszki.
+- Fiszki w stanie "pending" są przechowywane tylko w pamięci aplikacji.
 
 ---
 
@@ -118,3 +121,5 @@ Acceptance Criteria:
 
 - Endpointy REST API (/api) muszą być chronione przez Supabase JWT.
 - W początkowej wersji systemu zastosujemy uproszczony mechanizm uwierzytelniania poprzez jednego użytkownika hardcoded, który zostanie później zastąpiony pełnym systemem autoryzacji.
+- System logowania generowania fiszek służy wyłącznie do celów diagnostycznych i nie jest kluczowy dla podstawowej funkcjonalności aplikacji.
+- Anulacje lub przerwania procesu generowania są traktowane jako niepowodzenie w logach, ale nie wpływają na dane w tabeli fiszek.

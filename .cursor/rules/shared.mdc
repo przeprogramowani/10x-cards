@@ -22,7 +22,9 @@ When introducing changes to the project, always follow the directory structure b
 - `./src/layouts` - Astro layouts
 - `./src/pages` - Astro pages
 - `./src/pages/api` - API endpoints
-- `./src/components` - client-side components written in Astro (static) and React (dynamic)
+- `./src/middleware/index.ts` - Astro middleware
+- `./src/db` - Supabase clients and types
+- `./src/components` - Client-side components written in Astro (static) and React (dynamic)
 - `./src/assets` - static internal assets
 - `./public` - public assets
 
