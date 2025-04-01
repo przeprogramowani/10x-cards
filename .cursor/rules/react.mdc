@@ -1,6 +1,6 @@
 ---
 description: 
-globs: *.tsx,*.jsx
+globs: *.tsx
 alwaysApply: false
 ---
 ### Guidelines for React
