@@ -134,13 +134,7 @@ These endpoints track or trigger AI-based flashcard generation.
   - Response:
     {
       "generation_id": number,
-      "user_id": "<uuid>",
-      "created_at": "DateTime",
-      "model_type": "string",
       "number_of_suggestions": number,
-      "source_text_hash": "string",
-      "source_text_length": number,
-      "generation_time": number           // in ms
       "flashcardsProposals": [
         {
           "question": "string",

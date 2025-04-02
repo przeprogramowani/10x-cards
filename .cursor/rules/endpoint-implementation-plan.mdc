@@ -1,0 +1,193 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+Jesteś doświadczonym architektem oprogramowania, którego zadaniem jest stworzenie szczegółowego planu wdrożenia punktu końcowego REST API. Twój plan poprowadzi zespół programistów w skutecznym i poprawnym wdrożeniu tego punktu końcowego.
+
+Zanim zaczniemy, zapoznaj się z poniższymi informacjami:
+
+1. Route API specification:
+<route_api_specification>
+• POST /api/generations
+  - Description: Submit source text to the API for AI-based flashcard generation.
+  - Request Body:
+    {
+      "source_text": "string",            // 1000-10000 chars
+    }
+  - Response:
+    {
+      "generation_id": number,
+      "user_id": "<uuid>",
+      "created_at": "DateTime",
+      "model_type": "string",
+      "number_of_suggestions": number,
+      "source_text_hash": "string",
+      "source_text_length": number,
+      "generation_time": number           // in ms
+      "flashcardsProposals": [
+        {
+          "question": "string",
+          "answer": "string",
+          "source": "ai-full"
+        }
+      ]
+    }
+  - Errors:
+    - 400 if text too short or too long.
+    - 500 if AI generation request fails (a corresponding Generation Error Log may be created).
+</route_api_specification>
+
+2. Related database resources:
+<related_db_resources>
+### Tabela: auth.users
+- id (UUID, PRIMARY KEY)
+- email (VARCHAR, NOT NULL)
+- created_at (TIMESTAMP WITH TIME ZONE, NOT NULL, DEFAULT NOW())
+- updated_at (TIMESTAMP WITH TIME ZONE, NOT NULL, DEFAULT NOW())
+
+Zarządzana przez Supabase.
+
+### Tabela: flashcards
+Przechowuje fiszki (zarówno ręcznie dodane, jak i wygenerowane przez AI).
+
+- id (BIGSERIAL, PRIMARY KEY)
+- user_id (UUID, NOT NULL)
+  - Klucz obcy (FK) → users.user_id
+- question (VARCHAR(200), NOT NULL)
+- answer (VARCHAR(500), NOT NULL)
+- source (VARCHAR, NOT NULL)
+  - Oczekiwane wartości: 'manual', 'ai-full', 'ai-edited'
+  - Można wykorzystać CHECK CONSTRAINT
+- created_at (TIMESTAMP WITH TIME ZONE, NOT NULL, DEFAULT NOW())
+- updated_at (TIMESTAMP WITH TIME ZONE, NOT NULL, DEFAULT NOW())
+
+Ograniczenia:
+1. CONSTRAINT flashcards_question_length CHECK (char_length(question) <= 200)
+2. CONSTRAINT flashcards_answer_length CHECK (char_length(answer) <= 500)
+3. CONSTRAINT flashcards_source_enum CHECK (source IN ('manual', 'ai-full', 'ai-edited'))
+
+### Tabela: generations
+Rejestruje szczegóły każdej udanej próby generowania fiszek przez AI.
+
+- id (BIGSERIAL, PRIMARY KEY)
+- user_id (UUID, NOT NULL)
+  - Klucz obcy (FK) → users.user_id
+- created_at (TIMESTAMP WITH TIME ZONE, NOT NULL, DEFAULT NOW())
+- model_type (VARCHAR, NOT NULL)
+- number_of_suggestions (INTEGER, NOT NULL)
+- source_text_hash (VARCHAR, NOT NULL)
+- source_text_length (INTEGER, NOT NULL)
+- generation_time (INTEGER, NOT NULL)
+  - Czas (w milisekundach) potrzebny na generację
+- accepted_flashcards_unedited (INTEGER, NULLABLE)
+- accepted_flashcards_edited (INTEGER, NULLABLE)
+
+### Tabela: generation_error_logs
+Przechowuje informacje o błędach powstałych przy generowaniu fiszek przez AI.
+
+- id (BIGSERIAL, PRIMARY KEY)
+- user_id (UUID, NOT NULL)
+  - Klucz obcy (FK) → users.user_id
+- created_at (TIMESTAMP WITH TIME ZONE, NOT NULL, DEFAULT NOW())
+- model_type (VARCHAR, NOT NULL)
+- source_text_hash (VARCHAR, NOT NULL)
+- source_text_length (INTEGER, NOT NULL)
+- generation_time (INTEGER, NOT NULL)
+- error_code (VARCHAR, NOT NULL)
+- error_message (TEXT, NOT NULL)
+
+## 2. Relacje między tabelami
+
+- Tabela `users` → Tabela `flashcards` relacja 1:N
+  - Każdy użytkownik może mieć wiele fiszek (flashcards).
+- Tabela `users` → Tabela `generations` relacja 1:N
+  - Każdy użytkownik może mieć wiele rekordów w tabeli generations.
+- Tabela `users` → Tabela `generation_error_logs` relacja 1:N
+  - Każdy użytkownik może mieć wiele wpisów w logach błędów.
+</related_db_resources>
+
+3. Tech stack:
+<tech_stack>
+@tech-stack.md
+</tech_stack>
+
+4. Implementation rules:
+<implementation_rules>
+@shared.mdc @astro.mdc @backend.mdc
+</implementation_rules>
+
+Twoim zadaniem jest stworzenie kompleksowego planu wdrożenia endpointu interfejsu API REST. Przed dostarczeniem ostatecznego planu użyj znaczników <analysis>, aby przeanalizować informacje i nakreślić swoje podejście. W tej analizie upewnij się, że:
+
+1. Podsumuj kluczowe punkty specyfikacji API.
+2. Wymień wymagane i opcjonalne parametry ze specyfikacji API.
+3. Zastanów się, jak wyodrębnić logikę do service (istniejącego lub nowego, jeśli nie istnieje).
+4. Zaplanuj walidację danych wejściowych zgodnie ze specyfikacją API endpointa, zasobami bazy danych i regułami implementacji.
+5. Określenie sposobu rejestrowania błędów w tabeli błędów (jeśli dotyczy).
+6. Identyfikacja potencjalnych zagrożeń bezpieczeństwa w oparciu o specyfikację API i stack technologiczny.
+7. Nakreśl potencjalne scenariusze błędów i odpowiadające im kody stanu.
+
+Po przeprowadzeniu analizy utwórz szczegółowy plan wdrożenia w formacie markdown. Plan powinien zawierać następujące sekcje:
+
+1. Przegląd punktu końcowego
+2. Szczegóły żądania
+3. Szczegóły odpowiedzi
+4. Przepływ danych
+5. Względy bezpieczeństwa
+6. Obsługa błędów
+7. Wydajność
+8. Kroki implementacji
+
+W całym planie upewnij się, że
+- Używać prawidłowych kodów stanu API:
+  - 200 dla pomyślnego odczytu
+  - 201 dla pomyślnego utworzenia
+  - 400 dla nieprawidłowych danych wejściowych
+  - 401 dla nieautoryzowanego dostępu
+  - 404 dla nie znalezionych zasobów
+  - 500 dla błędów po stronie serwera
+- Dostosowanie do dostarczonego stosu technologicznego
+- Postępuj zgodnie z podanymi zasadami implementacji
+
+Końcowym wynikiem powinien być dobrze zorganizowany plan wdrożenia w formacie markdown. Oto przykład tego, jak powinny wyglądać dane wyjściowe:
+
+``markdown
+# API Endpoint Implementation Plan: [Nazwa punktu końcowego]
+
+## 1. Przegląd punktu końcowego
+[Krótki opis celu i funkcjonalności punktu końcowego]
+
+## 2. Szczegóły żądania
+- Metoda HTTP: [GET/POST/PUT/DELETE]
+- Struktura URL: [wzorzec URL]
+- Parametry:
+  - Wymagane: [Lista wymaganych parametrów]
+  - Opcjonalne: [Lista opcjonalnych parametrów]
+- Request Body: [Struktura treści żądania, jeśli dotyczy]
+
+## 3. Szczegóły odpowiedzi
+[Oczekiwana struktura odpowiedzi i kody statusu]
+
+## 4. Przepływ danych
+[Opis przepływu danych, w tym interakcji z zewnętrznymi usługami lub bazami danych]
+
+## 5. Względy bezpieczeństwa
+[Szczegóły uwierzytelniania, autoryzacji i walidacji danych]
+
+## 6. Obsługa błędów
+[Lista potencjalnych błędów i sposób ich obsługi]
+
+## 7. Rozważania dotyczące wydajności
+[Potencjalne wąskie gardła i strategie optymalizacji]
+
+## 8. Etapy wdrożenia
+1. [Krok 1]
+2. [Krok 2]
+3. [Krok 3]
+...
+
+```
+
+Pamiętaj, aby zapisać swój plan wdrożenia jako .ai/{endpoint-name}-{endpoint-http-method}-implementation-plan.md. Upewnij się, że plan jest szczegółowy, przejrzysty i zapewnia kompleksowe wskazówki dla zespołu programistów.
+
+Końcowe wyniki powinny składać się wyłącznie z planu wdrożenia w formacie markdown i nie powinny powielać ani powtarzać żadnej pracy wykonanej w sekcji analizy.
