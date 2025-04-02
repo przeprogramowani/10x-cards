@@ -1,6 +1,11 @@
 ## 1. Tabele
 
-### Tabela: users
+### Tabela: auth.users
+- id (UUID, PRIMARY KEY)
+- email (VARCHAR, NOT NULL)
+- created_at (TIMESTAMP WITH TIME ZONE, NOT NULL, DEFAULT NOW())
+- updated_at (TIMESTAMP WITH TIME ZONE, NOT NULL, DEFAULT NOW())
+
 Zarządzana przez Supabase.
 
 ### Tabela: flashcards
@@ -86,25 +91,25 @@ ALTER TABLE flashcards ENABLE ROW LEVEL SECURITY;
 CREATE POLICY select_own_flashcards ON flashcards
   FOR SELECT
   TO public
-  USING (user_id = current_setting('app.current_user_id')::uuid);
+  USING (auth.uid() = user_id);
 
 -- Polityka wstawiania: użytkownik może wstawić rekord, gdy user_id jest tożsamy z current_user_id
 CREATE POLICY insert_own_flashcards ON flashcards
   FOR INSERT
   TO public
-  WITH CHECK (user_id = current_setting('app.current_user_id')::uuid);
+  WITH CHECK (auth.uid() = user_id);
 
 -- Analogiczne polityki dla aktualizacji i usuwania
 CREATE POLICY update_own_flashcards ON flashcards
   FOR UPDATE
   TO public
-  USING (user_id = current_setting('app.current_user_id')::uuid)
-  WITH CHECK (user_id = current_setting('app.current_user_id')::uuid);
+  USING (auth.uid() = user_id)
+  WITH CHECK (auth.uid() = user_id);
 
 CREATE POLICY delete_own_flashcards ON flashcards
   FOR DELETE
   TO public
-  USING (user_id = current_setting('app.current_user_id')::uuid);
+  USING (auth.uid() = user_id);
 ```
 
 Identyczne zasady należy wdrożyć w tabelach `generations` i `generation_error_logs`.
