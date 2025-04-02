@@ -35,4 +35,3 @@ alwaysApply: false
 - Use aria-describedby to associate descriptive text with form inputs or complex elements
 - Implement aria-current for indicating the current item in a set, navigation, or process
 - Avoid redundant ARIA that duplicates the semantics of native HTML elements
-

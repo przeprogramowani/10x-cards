@@ -7,6 +7,7 @@ alwaysApply: false
 
 - Use functional components with hooks instead of class components
 - Never use "use client" and other Next.js directives as we use React with Astro
+- Extract logic into custom hooks in `src/components/hooks`
 - Implement React.memo() for expensive components that render often with the same props
 - Utilize React.lazy() and Suspense for code-splitting and performance optimization
 - Use the useCallback hook for event handlers passed to child components to prevent unnecessary re-renders
@@ -14,4 +15,3 @@ alwaysApply: false
 - Implement useId() for generating unique IDs for accessibility attributes
 - Consider using the new useOptimistic hook for optimistic UI updates in forms
 - Use useTransition for non-urgent state updates to keep the UI responsive
-
