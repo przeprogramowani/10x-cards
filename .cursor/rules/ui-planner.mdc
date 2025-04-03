@@ -1,6 +1,6 @@
 ---
-description:
-globs:
+description: 
+globs: 
 alwaysApply: false
 ---
 Jesteś wykwalifikowanym architektem UI/UX, którego zadaniem jest stworzenie kompleksowej architektury interfejsu użytkownika w oparciu o dokument wymagań produktu (PRD) i plan API. Twoim celem jest zaprojektowanie struktury interfejsu użytkownika, która skutecznie spełnia wymagania produktu i jest zgodna z możliwościami API.
@@ -58,7 +58,7 @@ Przedstaw ostateczną architekturę interfejsu użytkownika w następującym for
 
 [Opisz przepływ między widokami i kluczowe interakcje użytkownika]
 
-## 4. Struktura nawigacji
+## 4. Struktura layoutu i nawigacji
 
 [Wyjaśnij, w jaki sposób użytkownicy będą poruszać się między widokami]
 ```

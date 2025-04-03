@@ -9,151 +9,70 @@ First, review the following information:
 
 1. Product Requirements Document (PRD):
 <prd>
-@prd.md
+{{prd}}
 </prd>
 
 2. User Stories:
-<user_stories>w
-ID: US-003
-Tytuł: Generowanie fiszek przy użyciu AI
-Opis: Jako zalogowany użytkownik chcę wkleić kawałek tekstu i za pomocą przycisku wygenerować propozycje fiszek, aby zaoszczędzić czas na ręcznym tworzeniu pytań i odpowiedzi.
-Kryteria akceptacji:
-- W widoku generowania fiszek znajduje się pole tekstowe, w którym użytkownik może wkleić swój tekst.
-- Pole tekstowe oczekuje od 1000 do 10 000 znaków.
-- Po kliknięciu przycisku generowania aplikacja komunikuje się z API modelu LLM i wyświetla listę wygenerowanych propozycji fiszek do akceptacji przez użytkownika.
-- W przypadku problemów z API lub braku odpowiedzi modelu użytkownik zobaczy stosowny komunikat o błędzie.
-
-ID: US-004
-Tytuł: Przegląd i zatwierdzanie propozycji fiszek
-Opis: Jako zalogowany użytkownik chcę móc przeglądać wygenerowane fiszki i decydować, które z nich chcę dodać do mojego zestawu, aby zachować tylko przydatne pytania i odpowiedzi.
-Kryteria akceptacji:
-- Lista wygenerowanych fiszek jest wyświetlana pod formularzem generowania.
-- Przy każdej fiszce znajduje się przycisk pozwalający na jej zatwierdzenie, edycję lub odrzucenie.
-- Po zatwierdzeniu wybranych fiszek użytkownik może kliknąć przycisk zapisu i dodać je do bazy danych.
+<user_stories>
+{{user-stories}}
 </user_stories>
 
 3. View Description:
 <view_description>
-### 2.5. Ekran generowania fiszek przy użyciu AI
-- **Główny cel:** Automatyczne generowanie propozycji fiszek na podstawie wprowadzonego tekstu.
-- **Kluczowe informacje:** Pole do wklejenia tekstu (wymagane 1000-10000 znaków), lista wygenerowanych propozycji z opcjami akceptacji lub edycji.
-- **Kluczowe komponenty:** Duże pole tekstowe, przycisk generowania, wskaźnik ładowania, lista wyników generacji.
-- **UX, dostępność i bezpieczeństwo:** Przejrzyste instrukcje, komunikaty o postępie, obsługa błędów API, walidacja długości tekstu.
+{{view-description}}
 </view_description>
 
 4. Endpoint Description:
 <endpoint_description>
-• POST /api/generations
-  - Description: Submit source text to the API for AI-based flashcard generation.
-  - Request Body:
-    {
-      "source_text": "string",            // 1000-10000 chars
-    }
-  - Response:
-    {
-      "generation_id": number,
-      "number_of_suggestions": number,
-      "flashcardsProposals": [
-        {
-          "question": "string",
-          "answer": "string",
-          "source": "ai-full"
-        }
-      ]
-    }
-  - Errors:
-    - 400 if text too short or too long.
-    - 500 if AI generation request fails (a corresponding Generation Error Log may be created).
-
-• POST /api/flashcards
-  - Description: Create one or more flashcards (either manually or after editing AI-generated suggestions).
-  - Request Body:
-    [
-      {
-        "question": "string",   // up to 200 chars
-        "answer": "string",     // up to 500 chars
-        "source": "manual" | "ai-full" | "ai-edited",
-        "generation_id": number | null
-      }
-    ]
-  - Response: 201 Created
-  - Errors:
-    - 400 if validation fails (e.g., question or answer too long, empty array).
-    - 401 if unauthorized.
+{{endpoint-description}}
 </endpoint_description>
 
 5. Endpoint Implementation:
 <endpoint_implementation>
-@generations.astro
+{{endpoint-implementation}}
 </endpoint_implementation>
 
-6. Definicje typów:
-<type-definitions>
-@types.ts
-</type-definitions>
+6. Type Definitions:
+<type_definitions>
+{{types}}
+</type_definitions>
 
 7. Tech Stack:
 <tech_stack>
-@tech-stack.md
+{{tech-stack}}
 </tech_stack>
 
-Now, create an implementation plan for the frontend developer. Before providing the final plan, use <implementation_planning> tags inside your thinking block to break down the information and show your thought process. Pay special attention to state management and user interactions, ensuring they align with the API expectations based on the endpoint description, implementation, and user stories.
+Now, create an implementation plan for the frontend developer. Before providing the final plan, conduct your analysis and planning inside <analysis_and_planning> tags in your thinking block. Pay special attention to state management and user interactions, ensuring they align with the API expectations based on the endpoint description, implementation, and user stories.
 
-In your implementation planning, consider the following:
-- Summarize key points from each input section (PRD, User Stories, View Description, Endpoint Description, Endpoint Implementation, Type Definitions, and Tech Stack).
-- List the main components needed and provide a brief description of their responsibilities.
-- Identify required DTOs and custom View Models types for the view.
-- Identify potential state variables and custom hooks and explain their purpose.
-- List the required API calls and their corresponding frontend actions.
-- Enumerate user interactions and their expected outcomes.
-- Identify potential error scenarios and suggest how to handle them.
-- Consider how the view fits into the overall application.
-- Note any performance considerations based on the provided information.
+In your analysis and planning, follow these steps:
+1. For each input section (PRD, User Stories, View Description, Endpoint Description, Endpoint Implementation, Type Definitions, Tech Stack):
+   - Summarize key points
+   - List any requirements or constraints
+   - Note any potential challenges or important considerations
+2. List all main components needed, providing a brief description of their responsibilities and how they interact
+3. Identify required DTOs and custom View Models types for the view. Explain these new types in detail, breaking down their fields and associated types.
+4. Identify potential state variables and custom hooks, explaining their purpose and how they'll be used
+5. List the required API calls and their corresponding frontend actions
+6. Map each user story to specific implementation details, components, or features
+7. Enumerate user interactions and their expected outcomes
+8. Identify potential error scenarios and suggest how to handle them
+9. Consider how the view fits into the overall application architecture
+10. Note any performance considerations based on the provided information
+11. List potential challenges in implementing this view and suggest possible solutions
 
 After your analysis, provide the implementation plan in Markdown format with the following sections:
 
 1. Overview: A brief summary of the view and its purpose.
-2. Component Structure: An outline of the main components and their hierarchy.
-3. Types: A detailed description of types required to implement the view.
-4. State Management: A detailed description of how state will be managed in the view, determine if custom hook is required.
-4. API Integration: An explanation of how to integrate with the provided endpoint.
-5. User Interactions: A detailed description of user interactions and how to handle them.
-6. Error Handling: A description of how to handle potential errors or edge cases.
-7. Performance Considerations: Any performance optimizations to keep in mind.
+2. View Routing: Determine path on which view should be available.
+3. Component Structure: An outline of the main components and their hierarchy.
+4. Types: A detailed description of types required to implement the view, including a thorough breakdown of any new types or view models by fields and types.
+5. State Management: A detailed description of how state will be managed in the view, determine if a custom hook is required.
+6. API Integration: An explanation of how to integrate with the provided endpoint.
+7. User Interactions: A detailed description of user interactions and how to handle them.
+8. Error Handling: A description of how to handle potential errors or edge cases.
+9. Performance Considerations: Any performance optimizations to keep in mind.
+10. Implementation Steps
 
-Include code snippets or pseudocode where appropriate to illustrate key concepts. Ensure your plan is consistent with the PRD, user stories, and takes into account the provided tech stack.
+Ensure your plan is consistent with the PRD, user stories, and takes into account the provided tech stack.
 
-Here's an example of the desired output structure:
-
-```markdown
-# Implementation Plan for [View Name]
-
-## 1. Overview
-[Brief summary of the view and its purpose]
-
-## 2. Component Structure
-- ParentComponent
-  - ChildComponent1
-  - ChildComponent2
-    - GrandchildComponent
-
-## 4. Types
-[Detailed description of required types]
-
-## 5. State Management
-[Detailed description of state management]
-
-## 6. API Integration
-[Explanation of API integration]
-
-## 7. User Interactions
-[Detailed description of user interactions]
-
-## 8. Error Handling
-[Description of error handling]
-
-## 9. Performance Considerations
-[Performance optimizations to keep in mind]
-```
-
-Remember to provide only the implementation plan in a file .ai/{view-name}-view-plan.md in markdown format in english, without duplicating or rehashing any of the work you did in the implementation planning section.
+Remember to provide only the implementation plan in a file .ai/{view-name}-view-plan.md in markdown format in English, without duplicating or rehashing any of the work you did in the analysis and planning section.
