@@ -1,24 +1,53 @@
 import crypto from "crypto";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "../db/database.types";
-import type { GenerationInsert, GenerationErrorLogInsert } from "../types";
-
-export interface FlashcardProposal {
-  question: string;
-  answer: string;
-  source: "ai-full";
-}
-
-export interface GenerationResult {
-  generation_id: number;
-  number_of_suggestions: number;
-  flashcardsProposals: FlashcardProposal[];
-}
+import type {
+  FlashcardProposalResponseDTO,
+  CreateGenerationDTO,
+  CreateGenerationErrorLog,
+  GenerationResponseDTO,
+} from "../types";
 
 export class GenerationService {
   constructor(private supabase: SupabaseClient<Database>) {}
 
-  private generateMockFlashcards(text: string): FlashcardProposal[] {
+  async generateFlashcards(sourceText: string, userId: string): Promise<GenerationResponseDTO> {
+    const startTime = performance.now();
+
+    try {
+      // Generate mock flashcards
+      const flashcards = this.generateMockFlashcards(sourceText);
+
+      const endTime = performance.now();
+      const generationTime = Math.round(endTime - startTime);
+
+      // Prepare generation data
+      const generationData: CreateGenerationDTO = {
+        user_id: userId,
+        model_type: "mock-gpt",
+        number_of_suggestions: flashcards.length,
+        source_text_hash: this.calculateTextHash(sourceText),
+        source_text_length: sourceText.length,
+        generation_time: generationTime,
+        accepted_flashcards_edited: 0,
+        accepted_flashcards_unedited: 0,
+      };
+
+      const generationId = await this.saveGeneration(generationData);
+
+      return {
+        id: generationId,
+        number_of_suggestions: flashcards.length,
+        flashcardsProposals: flashcards,
+      };
+    } catch (error) {
+      // Log error and rethrow
+      await this.logError(error as Error, userId, sourceText);
+      throw error;
+    }
+  }
+
+  private generateMockFlashcards(text: string): FlashcardProposalResponseDTO[] {
     // Mock implementation that creates 3 flashcards based on text length
     return [
       {
@@ -43,7 +72,7 @@ export class GenerationService {
     return crypto.createHash("md5").update(text).digest("hex");
   }
 
-  private async saveGeneration(data: GenerationInsert): Promise<number> {
+  private async saveGeneration(data: CreateGenerationDTO): Promise<number> {
     const { data: generation, error } = await this.supabase.from("generations").insert(data).select("id").single();
 
     if (error) {
@@ -54,13 +83,12 @@ export class GenerationService {
   }
 
   async logError(error: Error, userId: string, sourceText: string): Promise<void> {
-    const errorLog: GenerationErrorLogInsert = {
+    const errorLog: CreateGenerationErrorLog = {
       user_id: userId,
       error_message: error.message,
-      error_type: error.name,
+      error_code: "GENERATION_FAILED",
       source_text_hash: this.calculateTextHash(sourceText),
       source_text_length: sourceText.length,
-      error_code: "GENERATION_FAILED",
       generation_time: 0,
       model_type: "mock-gpt",
     };
@@ -69,42 +97,6 @@ export class GenerationService {
 
     if (dbError) {
       console.error("Failed to log generation error:", dbError);
-    }
-  }
-
-  async generateFlashcards(sourceText: string, userId: string): Promise<GenerationResult> {
-    const startTime = performance.now();
-
-    try {
-      // Generate mock flashcards
-      const flashcards = this.generateMockFlashcards(sourceText);
-
-      const endTime = performance.now();
-      const generationTime = Math.round(endTime - startTime);
-
-      // Prepare generation data
-      const generationData: GenerationInsert = {
-        user_id: userId,
-        model_type: "mock-gpt",
-        number_of_suggestions: flashcards.length,
-        source_text_hash: this.calculateTextHash(sourceText),
-        source_text_length: sourceText.length,
-        generation_time: generationTime,
-        accepted_flashcards_edited: 0,
-        accepted_flashcards_unedited: 0,
-      };
-
-      const generationId = await this.saveGeneration(generationData);
-
-      return {
-        generation_id: generationId,
-        number_of_suggestions: flashcards.length,
-        flashcardsProposals: flashcards,
-      };
-    } catch (error) {
-      // Log error and rethrow
-      await this.logError(error as Error, userId, sourceText);
-      throw error;
     }
   }
 }

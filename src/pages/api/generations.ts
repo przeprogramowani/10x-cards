@@ -2,6 +2,7 @@ import { z } from "zod";
 import type { APIRoute } from "astro";
 import { GenerationService } from "../../services/GenerationService";
 import { DEFAULT_USER_ID } from "../../db/supabase.client";
+import type { InitGenerationDTO } from "../../types";
 
 // Validation schema for the request body
 const GenerationRequestSchema = z.object({
@@ -9,7 +10,7 @@ const GenerationRequestSchema = z.object({
     .string()
     .min(1000, "Text must be at least 1000 characters long")
     .max(10000, "Text cannot exceed 10000 characters"),
-});
+}) satisfies z.ZodType<InitGenerationDTO>;
 
 export const POST: APIRoute = async ({ request, locals }) => {
   try {

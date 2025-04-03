@@ -1,8 +1,3 @@
----
-description:
-globs:
-alwaysApply: false
----
 Jesteś doświadczonym architektem oprogramowania, którego zadaniem jest stworzenie szczegółowego planu wdrożenia punktu końcowego REST API. Twój plan poprowadzi zespół programistów w skutecznym i poprawnym wdrożeniu tego punktu końcowego.
 
 Zanim zaczniemy, zapoznaj się z poniższymi informacjami:
@@ -107,6 +102,11 @@ Przechowuje informacje o błędach powstałych przy generowaniu fiszek przez AI.
   - Każdy użytkownik może mieć wiele wpisów w logach błędów.
 </related_db_resources>
 
+3. Definicje typów:
+<type_definitions>
+@types.ts
+</type_definitions>
+
 3. Tech stack:
 <tech_stack>
 @tech-stack.md
@@ -121,11 +121,12 @@ Twoim zadaniem jest stworzenie kompleksowego planu wdrożenia endpointu interfej
 
 1. Podsumuj kluczowe punkty specyfikacji API.
 2. Wymień wymagane i opcjonalne parametry ze specyfikacji API.
-3. Zastanów się, jak wyodrębnić logikę do service (istniejącego lub nowego, jeśli nie istnieje).
-4. Zaplanuj walidację danych wejściowych zgodnie ze specyfikacją API endpointa, zasobami bazy danych i regułami implementacji.
-5. Określenie sposobu rejestrowania błędów w tabeli błędów (jeśli dotyczy).
-6. Identyfikacja potencjalnych zagrożeń bezpieczeństwa w oparciu o specyfikację API i stack technologiczny.
-7. Nakreśl potencjalne scenariusze błędów i odpowiadające im kody stanu.
+3. Wymień niezbędne typy DTO i Command Modele.
+4. Zastanów się, jak wyodrębnić logikę do service (istniejącego lub nowego, jeśli nie istnieje).
+5. Zaplanuj walidację danych wejściowych zgodnie ze specyfikacją API endpointa, zasobami bazy danych i regułami implementacji.
+6. Określenie sposobu rejestrowania błędów w tabeli błędów (jeśli dotyczy).
+7. Identyfikacja potencjalnych zagrożeń bezpieczeństwa w oparciu o specyfikację API i stack technologiczny.
+8. Nakreśl potencjalne scenariusze błędów i odpowiadające im kody stanu.
 
 Po przeprowadzeniu analizy utwórz szczegółowy plan wdrożenia w formacie markdown. Plan powinien zawierać następujące sekcje:
 
@@ -165,6 +166,9 @@ Końcowym wynikiem powinien być dobrze zorganizowany plan wdrożenia w formacie
   - Opcjonalne: [Lista opcjonalnych parametrów]
 - Request Body: [Struktura treści żądania, jeśli dotyczy]
 
+## 3. Wykorzystywane typy
+[DTOs i Command Modele niezbędne do implementacji]
+
 ## 3. Szczegóły odpowiedzi
 [Oczekiwana struktura odpowiedzi i kody statusu]
 
@@ -188,6 +192,6 @@ Końcowym wynikiem powinien być dobrze zorganizowany plan wdrożenia w formacie
 
 ```
 
-Pamiętaj, aby zapisać swój plan wdrożenia jako .ai/{endpoint-name}-{endpoint-http-method}-implementation-plan.md. Upewnij się, że plan jest szczegółowy, przejrzysty i zapewnia kompleksowe wskazówki dla zespołu programistów.
-
 Końcowe wyniki powinny składać się wyłącznie z planu wdrożenia w formacie markdown i nie powinny powielać ani powtarzać żadnej pracy wykonanej w sekcji analizy.
+
+Pamiętaj, aby zapisać swój plan wdrożenia jako .ai/view-implementation-plan.md. Upewnij się, że plan jest szczegółowy, przejrzysty i zapewnia kompleksowe wskazówki dla zespołu programistów.

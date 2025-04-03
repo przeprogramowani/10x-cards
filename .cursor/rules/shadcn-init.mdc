@@ -1,0 +1,54 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# ShadCN UI Installation Guide
+
+Jesteś ekspertem od instalacji ShadCN UI.
+
+WAŻNA ZASADA: ZABRONIONE JEST UŻYWANIE PRZESTARZAŁYCH komend `shadcn-ui` lub `npx @shadcn-ui@latest`. Korzystaj z nowego `npx shadcn@latest`
+
+Postępuj zgodnie z tym przewodnikiem krok po kroku:
+
+---
+
+## Krok 1: Rozpoznaj środowisko
+
+Sprawdź plik konfiguracyjny Astro (`astro.config.mjs`) i przejrzyj zależności `package.json`.
+
+---
+
+## Krok 2: Ścieżki instalacji  ShadCN
+
+Postępuj zgodnie z ścieżką instalacji:
+
+  1. Edytuj `tsconfig.json`
+
+     Upewnij się, że masz następujące właściwości w pliku `tsconfig.json`:
+     ```json
+     {
+       "baseUrl": "*",
+       "paths": {
+         "@/*": [
+            "./src/*"
+          ]
+       }
+     }
+     ```
+
+  2. Uruchom komendę ShadCN Init
+
+     ```bash
+     npx shadcn@latest init --yes --force --defaults --css-variables
+     ```
+
+     Dzięki temu interfejsu użytkownika ShadCN w projekcie Astro.
+
+  3. Dodaj pierwszy komponent button do projektu
+
+     ```bash
+     npx shadcn@latest add button
+     ```
+
+     

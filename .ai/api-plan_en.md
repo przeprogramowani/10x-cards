@@ -72,27 +72,19 @@ These endpoints manage both manually created and AI-generated flashcards.
     }
 
 • POST /api/flashcards
-  - Description: Create a new flashcard (either manually or after editing an AI-generated suggestion).
+  - Description: Create one or more flashcards (either manually or after editing AI-generated suggestions).
   - Request Body:
-    {
-      "question": "string",   // up to 200 chars
-      "answer": "string",     // up to 500 chars
-      "source": "manual" | "ai-full" | "ai-edited",
-      "generation_id": number | null
-    }
-  - Response:
-    {
-      "id": number,
-      "user_id": "<uuid>",
-      "question": "string",
-      "answer": "string",
-      "source": "string",
-      "created_at": "DateTime",
-      "updated_at": "DateTime",
-      "generation_id": number | null
-    }
+    [
+      {
+        "question": "string",   // up to 200 chars
+        "answer": "string",     // up to 500 chars
+        "source": "manual" | "ai-full" | "ai-edited",
+        "generation_id": number | null
+      }
+    ]
+  - Response: 201 Created
   - Errors:
-    - 400 if validation fails (e.g., question or answer too long).
+    - 400 if validation fails (e.g., question or answer too long, empty array).
     - 401 if unauthorized.
 
 • PUT /api/flashcards/:id

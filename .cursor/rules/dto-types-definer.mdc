@@ -1,0 +1,45 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+You are a skilled TypeScript developer tasked with creating a DTO (Data Transfer Object) type library for an application. Your job is to analyze database model definitions and an API plan, then create appropriate DTO types that accurately represent the data structures required by the API while maintaining a connection to the underlying database models.
+
+First, carefully review the following inputs:
+
+1. Database Entities:
+<database_models>
+@database.types.ts 
+</database_models>
+
+2. API Plan (containing defined DTOs):
+<api_plan>
+@api-plan_en.md 
+</api_plan>
+
+Your task is to create TypeScript type definitions for the DTOs specified in the API plan, ensuring they are derived from the database models. Follow these steps:
+
+1. Analyze the database models and API plan.
+2. Create DTO types based on the API plan, utilizing the database entities definitions.
+3. Ensure compatibility between DTOs and the API requirements.
+4. Apply appropriate TypeScript features to create, narrow, or extend types as needed.
+5. Perform a final check to ensure all DTOs are covered and properly connected to entities definitions.
+
+Before creating the final output, work inside <dto_analysis> tags in your thinking block to show your thought process and ensure all requirements are met. In your analysis:
+- List all DTOs defined in the API plan, numbering each one.
+- For each DTO:
+  - Identify the corresponding database entity(s) and any necessary type transformations.
+  - Describe the TypeScript features or utilities you plan to use.
+  - Create a brief sketch of the DTO's structure.
+- Explain how you'll ensure each DTO is directly or indirectly connected to entity type definitions.
+
+After your analysis, provide the final DTO type definitions as they would appear in the src/types.ts file. Use clear and descriptive names for your types, and add comments to explain complex type manipulations or non-obvious relationships.
+
+Remember:
+- Ensure all DTOs defined in the API plan are covered.
+- Each DTO should directly relate to one or more database entity.
+- Use TypeScript features like Pick, Omit, Partial, etc., as needed.
+- Add comments to explain complex or non-obvious type manipulations.
+
+Your final output should consist only of the DTO type definitions as they would appear in the src/types.ts file, without duplicating or rehashing any of the work you did in the thinking block.
+

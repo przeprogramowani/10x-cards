@@ -1,6 +1,6 @@
 ---
-description: 
-globs: 
+description:
+globs:
 alwaysApply: false
 ---
 Twoim zadaniem jest wdrożenie punktu końcowego interfejsu API REST w oparciu o podany plan wdrożenia. Twoim celem jest stworzenie solidnej i dobrze zorganizowanej implementacji, która zawiera odpowiednią walidację, obsługę błędów i podąża za wszystkimi logicznymi krokami opisanymi w planie.
@@ -8,11 +8,11 @@ Twoim zadaniem jest wdrożenie punktu końcowego interfejsu API REST w oparciu o
 Najpierw dokładnie przejrzyj dostarczony plan wdrożenia:
 
 <implementation_plan>
-@generations-api-plan.md 
+@generations-api-plan.md
 </implementation_plan>
 
 <implementation_rules>
-@shared.mdc @backend.mdc 
+@shared.mdc @backend.mdc
 </implementation_rules>
 
 <implementation_approach>
@@ -51,7 +51,7 @@ Teraz wykonaj następujące kroki, aby zaimplementować punkt końcowy interfejs
    - Dodaj jasne komentarze, aby wyjaśnić złożoną logikę lub ważne decyzje
    - Dołącz dokumentację dla głównej funkcji i wszelkich funkcji pomocniczych.
 
-Po zakończeniu implementacji przedstaw swój kod w tagach <implementation>. Upewnij się, że zawiera wszystkie niezbędne importy, definicje funkcji i wszelkie dodatkowe funkcje pomocnicze lub klasy wymagane do implementacji.
+Po zakończeniu implementacji upewnij się, że zawiera wszystkie niezbędne importy, definicje funkcji i wszelkie dodatkowe funkcje pomocnicze lub klasy wymagane do implementacji.
 
 Jeśli musisz przyjąć jakieś założenia lub masz jakiekolwiek pytania dotyczące planu implementacji, przedstaw je przed pisaniem kodu.
 
