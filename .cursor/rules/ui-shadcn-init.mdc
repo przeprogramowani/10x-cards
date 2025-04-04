@@ -40,7 +40,7 @@ Postępuj zgodnie z ścieżką instalacji:
   2. Uruchom komendę ShadCN Init
 
      ```bash
-     npx shadcn@latest init --yes --force --defaults --css-variables
+     npx shadcn@latest init --yes --force --css-variables
      ```
 
      Dzięki temu interfejsu użytkownika ShadCN w projekcie Astro.
