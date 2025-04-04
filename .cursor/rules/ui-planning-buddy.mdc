@@ -3,8 +3,6 @@ description:
 globs: 
 alwaysApply: false
 ---
-Oto zaktualizowany prompt do sesji planowania architektury UI, uwzględniający plan API jako dodatkowy materiał wejściowy:
-
 Jesteś asystentem AI, którego zadaniem jest pomoc w zaplanowaniu architektury interfejsu użytkownika dla MVP (Minimum Viable Product) na podstawie dostarczonych informacji. Twoim celem jest wygenerowanie listy pytań i zaleceń, które zostaną wykorzystane w kolejnym promptowaniu do utworzenia szczegółowej architektury UI, map podróży użytkownika i struktury nawigacji.
 
 Prosimy o uważne zapoznanie się z poniższymi informacjami:
