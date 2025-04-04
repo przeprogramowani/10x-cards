@@ -1,6 +1,6 @@
 ---
 description: 
-globs: *.astro
+globs: *.astro,src/pages/*
 alwaysApply: false
 ---
 ### Guidelines for Astro
@@ -8,6 +8,7 @@ alwaysApply: false
 - Leverage View Transitions API for smooth page transitions (use ClientRouter)
 - Use content collections with type safety for blog posts, documentation, etc.
 - Leverage Server Endpoints for API routes
+- Use POST, GET  - uppercase format for endpoint handlers
 - Use zod for input validation in API routes
 - Extract logic into services in `src/lib/services`
 - Implement middleware for request/response modification
