@@ -112,7 +112,7 @@
     ```json
     {
       "generation_id": 123,
-      "flashcardsProposals": [
+      "flashcards_proposals": [
          { "front": "Generated Question", "back": "Generated Answer", "source": "ai-full" }
       ],
       "generated_count": 5
