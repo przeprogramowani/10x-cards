@@ -64,6 +64,7 @@ Po przeprowadzeniu analizy dostarcz plan wdrożenia w formacie Markdown z nastę
 4. Szczegóły komponentu: Dla każdego komponentu należy opisać:
  - Propsy, które akceptuje
  - Główne elementy
+ - Obsługiwane interakcje i zdarzenia
  - Zarządzanie stanem
 5. Typy: Szczegółowy opis typów wymaganych do implementacji widoku, w tym dokładny podział wszelkich nowych typów lub modeli widoku według pól i typów.
 6. Zarządzanie stanem: Szczegółowy opis sposobu zarządzania stanem w widoku, określenie, czy wymagany jest customowy hook.
@@ -97,7 +98,6 @@ Oto przykład tego, jak powinien wyglądać plik wyjściowy (treść jest do zas
 - Główne elementy: [opis]
 - Obsługiwane interakcje: [lista]
 - Zarządzanie stanem: [opis]
-- Komunikacja z rodzicem: [opis, jeśli dotyczy]
 
 ### [Nazwa komponentu 2]
 [...]
