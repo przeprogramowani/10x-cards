@@ -1,78 +1,129 @@
----
-description: 
-globs: 
-alwaysApply: false
----
-You are a senior frontend developer tasked with creating a detailed implementation plan for a new view in a web application. Your goal is to provide a clear, comprehensive plan that another frontend developer can follow to correctly and efficiently implement the view.
+Jako starszy programista frontendu Twoim zadaniem jest stworzenie szczegółowego planu wdrożenia nowego widoku w aplikacji internetowej. Plan ten powinien być kompleksowy i wystarczająco jasny dla innego programisty frontendowego, aby mógł poprawnie i wydajnie wdrożyć widok.
 
-First, review the following information:
+Najpierw przejrzyj następujące informacje:
 
 1. Product Requirements Document (PRD):
-<prd>
-{{prd}}
-</prd>
+<product_requirements_document>
 
-2. User Stories:
-<user_stories>
-{{user-stories}}
-</user_stories>
+</product_requirements_document>
 
-3. View Description:
+2. Opis widoku:
 <view_description>
-{{view-description}}
+
 </view_description>
 
+3. User Stories:
+<user_stories>
+
+</user_stories>
+
 4. Endpoint Description:
-<endpoint_description>
-{{endpoint-description}}
+
 </endpoint_description>
 
 5. Endpoint Implementation:
 <endpoint_implementation>
-{{endpoint-implementation}}
+
 </endpoint_implementation>
 
 6. Type Definitions:
 <type_definitions>
-{{types}}
+
 </type_definitions>
 
 7. Tech Stack:
 <tech_stack>
-{{tech-stack}}
+
 </tech_stack>
 
-Now, create an implementation plan for the frontend developer. Before providing the final plan, conduct your analysis and planning inside <analysis_and_planning> tags in your thinking block. Pay special attention to state management and user interactions, ensuring they align with the API expectations based on the endpoint description, implementation, and user stories.
+Przed utworzeniem ostatecznego planu wdrożenia przeprowadź analizę i planowanie wewnątrz tagów <implementation_breakdown> w swoim bloku myślenia. Zwróć szczególną uwagę na zarządzanie stanem i interakcje użytkownika, upewniając się, że są one zgodne z oczekiwaniami API w oparciu o opis punktu końcowego, implementację i historie użytkowników. Ta sekcja może być dość długa, ponieważ ważne jest, aby być dokładnym.
 
-In your analysis and planning, follow these steps:
-1. For each input section (PRD, User Stories, View Description, Endpoint Description, Endpoint Implementation, Type Definitions, Tech Stack):
-   - Summarize key points
-   - List any requirements or constraints
-   - Note any potential challenges or important considerations
-2. List all main components needed, providing a brief description of their responsibilities and how they interact
-3. Identify required DTOs and custom View Models types for the view. Explain these new types in detail, breaking down their fields and associated types.
-4. Identify potential state variables and custom hooks, explaining their purpose and how they'll be used
-5. List the required API calls and their corresponding frontend actions
-6. Map each user story to specific implementation details, components, or features
-7. Enumerate user interactions and their expected outcomes
-8. Identify potential error scenarios and suggest how to handle them
-9. Consider how the view fits into the overall application architecture
-10. Note any performance considerations based on the provided information
-11. List potential challenges in implementing this view and suggest possible solutions
+W swoim podziale implementacji wykonaj następujące kroki:
+1. Dla każdej sekcji wejściowej (PRD, User Stories, Endpoint Description, Endpoint Implementation, Type Definitions, Tech Stack):
+   - Podsumuj kluczowe punkty
+ - Wymień wszelkie wymagania lub ograniczenia
+ - Zwróć uwagę na wszelkie potencjalne wyzwania lub ważne kwestie
+2. Wyodrębnienie i wypisanie kluczowych wymagań z PRD
+3. Wypisanie wszystkich potrzebnych głównych komponentów, wraz z krótkim opisem ich obowiązków i sposobu interakcji
+4. Stworzenie wysokopoziomowego diagramu drzewa komponentów
+5. Zidentyfikuj wymagane DTO i niestandardowe typy ViewModel dla widoku. Szczegółowo wyjaśnij te nowe typy, dzieląc ich pola i powiązane typy.
+6. Zidentyfikuj potencjalne zmienne stanu i niestandardowe haki, wyjaśniając ich cel i sposób ich użycia
+7. Wymień wymagane wywołania API i odpowiadające im akcje frontendowe
+8. Mapowanie każdej historii użytkownika do konkretnych szczegółów implementacji, komponentów lub funkcji
+9. Wymień interakcje użytkownika i ich oczekiwane wyniki
+10. Zidentyfikuj potencjalne scenariusze błędów i zasugeruj, jak sobie z nimi poradzić
+11. Rozważ, w jaki sposób widok pasuje do ogólnej architektury aplikacji
+12. Zwróć uwagę na wszelkie kwestie związane z wydajnością w oparciu o dostarczone informacje
+13. Wymień potencjalne wyzwania związane z wdrożeniem tego widoku i zasugeruj możliwe rozwiązania
 
-After your analysis, provide the implementation plan in Markdown format with the following sections:
+Po przeprowadzeniu analizy dostarcz plan wdrożenia w formacie Markdown z następującymi sekcjami:
 
-1. Overview: A brief summary of the view and its purpose.
-2. View Routing: Determine path on which view should be available.
-3. Component Structure: An outline of the main components and their hierarchy.
-4. Types: A detailed description of types required to implement the view, including a thorough breakdown of any new types or view models by fields and types.
-5. State Management: A detailed description of how state will be managed in the view, determine if a custom hook is required.
-6. API Integration: An explanation of how to integrate with the provided endpoint.
-7. User Interactions: A detailed description of user interactions and how to handle them.
-8. Error Handling: A description of how to handle potential errors or edge cases.
-9. Performance Considerations: Any performance optimizations to keep in mind.
-10. Implementation Steps
+1. Przegląd: Krótkie podsumowanie widoku i jego celu.
+2. Routing widoku: Określenie ścieżki, na której widok powinien być dostępny.
+3. Struktura komponentów: Zarys głównych komponentów i ich hierarchii.
+4. Szczegóły komponentu: Dla każdego komponentu należy opisać:
+ - Propsy, które akceptuje
+ - Główne elementy
+ - Zarządzanie stanem
+5. Typy: Szczegółowy opis typów wymaganych do implementacji widoku, w tym dokładny podział wszelkich nowych typów lub modeli widoku według pól i typów.
+6. Zarządzanie stanem: Szczegółowy opis sposobu zarządzania stanem w widoku, określenie, czy wymagany jest customowy hook.
+7. Integracja API: Wyjaśnienie sposobu integracji z dostarczonym punktem końcowym.
+8. Interakcje użytkownika: Szczegółowy opis interakcji użytkownika i sposobu ich obsługi.
+9. Obsługa błędów: Opis sposobu obsługi potencjalnych błędów lub przypadków brzegowych.
+10. Rozważania dotyczące wydajności: Wszelkie optymalizacje wydajności, o których należy pamiętać.
+11. Kroki implementacji: Przewodnik krok po kroku dotyczący implementacji widoku.
 
-Ensure your plan is consistent with the PRD, user stories, and takes into account the provided tech stack.
+Upewnij się, że Twój plan jest zgodny z PRD, historyjkami użytkownika i uwzględnia dostarczony stos technologiczny.
 
-Remember to provide only the implementation plan in a file .ai/{view-name}-view-plan.md in markdown format in English, without duplicating or rehashing any of the work you did in the analysis and planning section.
+Ostateczne wyniki powinny być w języku polskim i zapisane w pliku o nazwie .ai/{view-name}-view-implementation-plan.md. Nie uwzględniaj żadnej analizy i planowania w końcowym wyniku.
+
+Oto przykład tego, jak powinien wyglądać plik wyjściowy (treść jest zastępcza):
+
+``markdown
+# Plan implementacji widoku [Nazwa widoku]
+
+## 1. Przegląd
+[Krótki opis widoku i jego celu]
+
+## 2. Routing widoku
+[Ścieżka, na której widok powinien być dostępny]
+
+## 3. Struktura komponentów
+[Zarys głównych komponentów i ich hierarchii]
+
+## 4. Szczegóły komponentów
+### [Nazwa komponentu 1]
+- Propsy: [lista rekwizytów]
+- Główne elementy: [opis]
+- Obsługiwane interakcje: [lista]
+- Zarządzanie stanem: [opis]
+- Komunikacja z rodzicem: [opis, jeśli dotyczy]
+
+### [Nazwa komponentu 2]
+[...]
+
+## 5. Typy
+[Szczegółowy opis wymaganych typów]
+
+## 6. Zarządzanie stanem
+[Opis zarządzania stanem w widoku]
+
+## 7. Integracja API
+[Wyjaśnienie integracji z dostarczonym endpointem]
+
+## 8. Interakcje użytkownika
+[Szczegółowy opis interakcji użytkownika]
+
+## 9. Obsługa błędów
+[Opis obsługi potencjalnych błędów]
+
+## 10. Uwagi dotyczące wydajności
+[Optymalizacje wydajności do uwzględnienia]
+
+## 11. Kroki implementacji
+1. [Krok 1]
+2. [Krok 2]
+3. [...]
+```
+
+Rozpocznij analizę i planowanie już teraz. Twój ostateczny wynik powinien składać się wyłącznie z planu wdrożenia w języku polskim w formacie markdown, który zapiszesz w pliku .ai/{view-name}-view-implementation-plan.md i nie powinien powielać ani powtarzać żadnej pracy wykonanej w podziale implementacji.
