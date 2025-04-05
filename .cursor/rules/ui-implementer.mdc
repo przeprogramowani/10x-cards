@@ -8,14 +8,16 @@ Twoim zadaniem jest zaimplementowanie widoku frontendu w oparciu o podany plan i
 Najpierw przejrzyj plan implementacji:
 
 <implementation_plan>
-@flashcard-generation-view-plan.md 
+
 </implementation_plan>
 
 Teraz przejrzyj zasady implementacji:
 
 <implementation_rules>
-@shared.mdc @frontend.mdc @astro.mdc @react.mdc @shadcn-dev.mdc 
+
 </implementation_rules>
+
+Wdrażaj plan zgodnie z następującym podejściem:
 
 <implementation_approach>
 Realizuj maksymalnie 3 kroki planu implementacji, podsumuj krótko co zrobiłeś i opisz plan na 3 kolejne działania - zatrzymaj w tym momencie pracę i czekaj na mój feedback.
@@ -31,13 +33,13 @@ Wykonaj następujące kroki, aby zaimplementować widok frontendu:
    - Upewnij się, że obowiązki i relacje każdego komponentu są jasno zdefiniowane.
 
 2. Integracja API:
-   - Zidentyfikuj wszystkie punkty końcowe API wymienione w planie.
-   - Wdrożenie niezbędnych wywołań API dla każdego punktu końcowego.
-   - Obsługa odpowiedzi API i odpowiednia aktualizacja stanu komponentów.
+   - Zidentyfikuj wszystkie endpointy API wymienione w planie.
+   - Wdróż niezbędne wywołania API dla każdego endpointa.
+   - Obsłuż odpowiedzi z API i odpowiednio aktualizacji stan komponentów.
 
 3. Interakcje użytkownika:
-   - Lista wszystkich interakcji użytkownika określonych w planie wdrożenia.
-   - Wdrożenie obsługi zdarzeń dla każdej interakcji.
+   - Wylistuj wszystkie interakcje użytkownika określone w planie wdrożenia.
+   - Wdróż obsługi zdarzeń dla każdej interakcji.
    - Upewnij się, że każda interakcja wyzwala odpowiednią akcję lub zmianę stanu.
 
 4. Zarządzanie stanem:
@@ -45,13 +47,13 @@ Wykonaj następujące kroki, aby zaimplementować widok frontendu:
    - Zaimplementuj zarządzanie stanem przy użyciu odpowiedniej metody (stan lokalny, custom hook, stan współdzielony).
    - Upewnij się, że zmiany stanu wyzwalają niezbędne ponowne renderowanie.
 
-5. Stylizacja i układ:
-   - Zastosuj określoną stylizację i układ, jak wspomniano w planie wdrożenia.
+5. Stylowanie i layout:
+   - Zastosuj określone stylowanie i layout, jak wspomniano w planie wdrożenia.
    - Zapewnienie responsywności, jeśli wymaga tego plan.
 
 6. Obsługa błędów i przypadki brzegowe:
    - Wdrożenie obsługi błędów dla wywołań API i interakcji użytkownika.
-   - Rozważ i obsłuż potencjalne przypadki brzegowe wymienione w planie.
+   - Rozważ i obsłuż potencjalne edge case'y wymienione w planie.
 
 7. Optymalizacja wydajności:
    - Wdrożenie wszelkich optymalizacji wydajności określonych w planie lub zasadach.
