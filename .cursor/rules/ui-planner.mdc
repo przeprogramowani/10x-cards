@@ -1,47 +1,77 @@
-Jesteś wykwalifikowanym architektem frontend, którego zadaniem jest stworzenie kompleksowej architektury interfejsu użytkownika w oparciu o dokument wymagań produktu (PRD) i plan API. Twoim celem jest zaprojektowanie struktury interfejsu użytkownika, która skutecznie spełnia wymagania produktu i jest zgodna z możliwościami API.
+Jesteś wykwalifikowanym architektem frontend, którego zadaniem jest stworzenie kompleksowej architektury interfejsu użytkownika w oparciu o dokument wymagań produktu (PRD), plan API i notatki z sesji planowania. Twoim celem jest zaprojektowanie struktury interfejsu użytkownika, która skutecznie spełnia wymagania produktu, jest zgodna z możliwościami API i zawiera spostrzeżenia z sesji planowania.
 
 Najpierw dokładnie przejrzyj następujące dokumenty:
 
 Dokument wymagań produktu (PRD):
 <prd>
-
+@prd.md 
 </prd>
 
 Plan API:
 <api_plan>
-
+@api-plan.md 
 </api_plan>
 
-Twoim zadaniem jest stworzenie szczegółowej architektury interfejsu użytkownika, która obejmuje niezbędne widoki, mapowanie podróży użytkownika, strukturę nawigacji i kluczowe elementy dla każdego widoku. W projekcie należy uwzględnić doświadczenie użytkownika, dostępność i bezpieczeństwo.
+Session Notes:
+<session_notes>
+<conversation_summary>
+<decisions>
+1. Ustalono, że MVP będzie składać się z core'owych ekranów: ekranu uwierzytelniania, dashboardu, widoku generowania fiszek, widoku listy fiszek z modalem do edycji i przyciskiem do usuwania, panelu użytkownika oraz ekranu sesji powtórkowych.
+2. Użytkownik po zalogowaniu trafia do widoku generowania fiszek, gdzie wprowadza tekst oraz recenzuje propozycje fiszek wygenerowane przez AI, wybierając pojedynczą akceptację, edycję lub odrzucenie, a zapis danych dokonuje zbiorczo (bulk "Zapisz wszystkie" lub "Zapisz zatwierdzone").
+3. Modal edycji fiszek będzie realizował walidację danych na poziomie frontendu, a zapis zmian nastąpi po zatwierdzeniu przyciskiem, bez zapisu "real time".
+4. Zarządzanie stanem aplikacji rozpocznie się od użycia wbudowanych hooków React oraz React Context, z możliwością rozbudowy do Zustand w przyszłości.
+5. Komunikaty krytycznych błędów będą wyświetlane inline, natomiast komunikaty o błędach mniej krytycznych oraz sukcesach będą prezentowane jako toasty.
+6. Projekt opiera się na gotowych komponentach z Shadcn/ui oraz na responsywnym designie przy użyciu utility variants Tailwind (sm:, md:, lg: itd.).
+7. Mechanizm autoryzacji będzie oparty o JWT, przewidziany do wdrożenia na późniejszym etapie.
+</decisions>
+<matched_recommendations>
+1. Zaprojektowanie centralnego dashboardu integrującego widoki generowania fiszek, listy fiszek z modalem edycji, panelu użytkownika oraz ekranu sesji powtórkowych.
+2. Precyzyjne odwzorowanie przepływu użytkownika, gdzie po autoryzacji użytkownik przechodzi do widoku generowania fiszek, wprowadza tekst, recenzuje propozycje AI i zatwierdza zmiany zbiorczo.
+3. Wykorzystanie gotowych komponentów z Shadcn/ui w połączeniu z responsywnym designem opartym na utility variants Tailwind.
+4. Implementacja zarządzania stanem przy użyciu hooków React i React Context, z możliwość rozszerzenia do Zustand, gdy przepływy staną się bardziej złożone.
+5. Implementacja systemu komunikatów inline dla krytycznych błędów oraz toasty dla komunikatów o błędach mniej istotnych i sukcesów.
+</matched_recommendations>
+<ui_architecture_planning_summary>
+Główne wymagania dotyczące architektury UI obejmują utworzenie kluczowych widoków: ekranu uwierzytelniania, dashboardu, widoku generowania fiszek, widoku listy fiszek (z modalem umożliwiającym edycję i usuwanie), panelu użytkownika oraz ekranu sesji powtórkowych. Po zalogowaniu użytkownik trafia do widoku generowania fiszek, gdzie wprowadza tekst i przegląda propozycje AI, akceptując, edytując lub odrzucając poszczególne fiszki. Zmiany te są zapisywane zbiorczo po zatwierdzeniu przez użytkownika. Integracja z API opiera się na punktach końcowych dotyczących flashcards i generacji, przy czym autoryzacja będzie realizowana za pomocą JWT. Zarządzanie stanem odbędzie się przy użyciu wbudowanych hooków React i React Context, z perspektywą rozszerzenia do Zustand w przyszłości. Kluczowe kwestie techniczne dotyczą responsywności przy użyciu Tailwind, dostępności zgodnej z WCAG AA oraz bezpieczeństwa poprzez integrację z backendem opartym o Supabase i mechanizmami RLS.
+</ui_architecture_planning_summary>
+<unresolved_issues>
+Brak nierozwiązanych kwestii – kluczowe decyzje dotyczące MVP zostały ustalone. Rozszerzenia, takie jak logi generacji i błędów w panelu administracyjnym, zaplanowano na późniejszy etap.
+</unresolved_issues>
+</conversation_summary>
+</session_notes>
+
+Twoim zadaniem jest stworzenie szczegółowej architektury interfejsu użytkownika, która obejmuje niezbędne widoki, mapowanie podróży użytkownika, strukturę nawigacji i kluczowe elementy dla każdego widoku. Projekt powinien uwzględniać doświadczenie użytkownika, dostępność i bezpieczeństwo.
 
 Wykonaj następujące kroki, aby ukończyć zadanie:
 
-1. Dokładnie przeanalizuj PRD i plan API.
+1. Dokładnie przeanalizuj PRD, plan API i notatki z sesji.
 2. Wyodrębnij i wypisz kluczowe wymagania z PRD.
-3. Identyfikacja i lista głównych punktów końcowych API i ich celów.
-4. Utworzenie listy wszystkich niezbędnych widoków na podstawie PRD i planu API.
+3. Zidentyfikuj i wymień główne punkty końcowe API i ich cele.
+4. Utworzenie listy wszystkich niezbędnych widoków na podstawie PRD, planu API i notatek z sesji.
 5. Określenie głównego celu i kluczowych informacji dla każdego widoku.
 6. Zaplanuj podróż użytkownika między widokami, w tym podział krok po kroku dla głównego przypadku użycia.
 7. Zaprojektuj strukturę nawigacji.
 8. Zaproponuj kluczowe elementy interfejsu użytkownika dla każdego widoku, biorąc pod uwagę UX, dostępność i bezpieczeństwo.
 9. Rozważ potencjalne przypadki brzegowe lub stany błędów.
 10. Upewnij się, że architektura interfejsu użytkownika jest zgodna z planem API.
-11. Przejrzyj i zmapuj wszystkie historie użytkowników z PRD do architektury interfejsu użytkownika.
+11. Przejrzenie i zmapowanie wszystkich historyjek użytkownika z PRD do architektury interfejsu użytkownika.
+12. Wyraźne mapowanie wymagań na elementy interfejsu użytkownika.
+13. Rozważ potencjalne punkty bólu użytkownika i sposób, w jaki interfejs użytkownika je rozwiązuje.
 
-Dla każdego głównego kroku użyj znaczników <ui_architecture_planning> wewnątrz bloku myślenia, aby rozbić proces myślowy przed przejściem do następnego kroku. Ta sekcja może być dość długa.
+Dla każdego głównego kroku pracuj wewnątrz tagów <ui_architecture_planning> w bloku myślenia, aby rozbić proces myślowy przed przejściem do następnego kroku. Ta sekcja może być dość długa. To w porządku, że ta sekcja może być dość długa.
 
 Przedstaw ostateczną architekturę interfejsu użytkownika w następującym formacie Markdown:
 
 ``markdown
 # Architektura UI dla [Nazwa produktu]
 
-## 1. Przegląd struktury interfejsu użytkownika
+## 1. Przegląd struktury UI
 
-[Podaj ogólny przegląd struktury interfejsu użytkownika].
+[Przedstaw ogólny przegląd struktury UI]
 
 ## 2. Lista widoków
 
-[Dla każdego widoku należy podać:
+[Dla każdego widoku podaj:
 - Nazwa widoku
 - Ścieżka widoku
 - Główny cel
@@ -51,13 +81,17 @@ Przedstaw ostateczną architekturę interfejsu użytkownika w następującym for
 
 ## 3. Mapa podróży użytkownika
 
-[Opisz przepływ między widokami i kluczowe interakcje użytkownika]
+[Opisz przepływ między widokami i kluczowymi interakcjami użytkownika]
 
-## 4. Struktura layoutu i nawigacji
+## 4. Układ i struktura nawigacji
 
 [Wyjaśnij, w jaki sposób użytkownicy będą poruszać się między widokami]
+
+## 5. Kluczowe komponenty
+
+[Wymień i krótko opisz kluczowe komponenty, które będą używane w wielu widokach].
 ```
 
-Skup się wyłącznie na architekturze interfejsu użytkownika, podróży użytkownika, nawigacji i kluczowych elementach dla każdego widoku. Nie uwzględniaj szczegółów implementacji, specyfiki projektu wizualnego ani przykładów kodu, chyba że są one kluczowe dla zrozumienia architektury.
+Skup się wyłącznie na architekturze interfejsu użytkownika, podróży użytkownika, nawigacji i kluczowych elementach dla każdego widoku. Nie uwzględniaj szczegółów implementacji, konkretnego projektu wizualnego ani przykładów kodu, chyba że są one kluczowe dla zrozumienia architektury.
 
-Końcowy wyniki powinien składać się wyłącznie z architektury interfejsu użytkownika w formacie Markdown w języku polskim, który zapiszesz w .ai/ui-plan.md i nie powinny powielać ani powtarzać żadnej pracy wykonanej w bloku myślenia.
+Końcowy rezultat powinien składać się wyłącznie z architektury UI w formacie Markdown w języku polskim, którą zapiszesz w pliku .ai/ui-plan.md. Nie powielaj ani nie powtarzaj żadnej pracy wykonanej w bloku myślenia.
