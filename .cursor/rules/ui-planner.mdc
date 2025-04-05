@@ -60,4 +60,4 @@ Przedstaw ostateczną architekturę interfejsu użytkownika w następującym for
 
 Skup się wyłącznie na architekturze interfejsu użytkownika, podróży użytkownika, nawigacji i kluczowych elementach dla każdego widoku. Nie uwzględniaj szczegółów implementacji, specyfiki projektu wizualnego ani przykładów kodu, chyba że są one kluczowe dla zrozumienia architektury.
 
-Końcowy wyniki powinien składać się wyłącznie z architektury interfejsu użytkownika w formacie Markdown w języku polskim, który zapiszesz w .ai/ui-architecture.md i nie powinny powielać ani powtarzać żadnej pracy wykonanej w bloku myślenia.
+Końcowy wyniki powinien składać się wyłącznie z architektury interfejsu użytkownika w formacie Markdown w języku polskim, który zapiszesz w .ai/ui-plan.md i nie powinny powielać ani powtarzać żadnej pracy wykonanej w bloku myślenia.
