@@ -1,20 +1,15 @@
----
-description: 
-globs: 
-alwaysApply: false
----
-Jesteś wykwalifikowanym architektem UI/UX, którego zadaniem jest stworzenie kompleksowej architektury interfejsu użytkownika w oparciu o dokument wymagań produktu (PRD) i plan API. Twoim celem jest zaprojektowanie struktury interfejsu użytkownika, która skutecznie spełnia wymagania produktu i jest zgodna z możliwościami API.
+Jesteś wykwalifikowanym architektem frontend, którego zadaniem jest stworzenie kompleksowej architektury interfejsu użytkownika w oparciu o dokument wymagań produktu (PRD) i plan API. Twoim celem jest zaprojektowanie struktury interfejsu użytkownika, która skutecznie spełnia wymagania produktu i jest zgodna z możliwościami API.
 
 Najpierw dokładnie przejrzyj następujące dokumenty:
 
 Dokument wymagań produktu (PRD):
 <prd>
-@prd.md
+
 </prd>
 
 Plan API:
 <api_plan>
-@api-plan_en.md
+
 </api_plan>
 
 Twoim zadaniem jest stworzenie szczegółowej architektury interfejsu użytkownika, która obejmuje niezbędne widoki, mapowanie podróży użytkownika, strukturę nawigacji i kluczowe elementy dla każdego widoku. W projekcie należy uwzględnić doświadczenie użytkownika, dostępność i bezpieczeństwo.
