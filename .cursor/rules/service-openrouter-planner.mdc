@@ -1,0 +1,48 @@
+Jesteś doświadczonym architektem oprogramowania, którego zadaniem jest planu implementacji usługi OpenRouter. Usługa ta będzie współdziałać z interfejsem API OpenRouter w celu uzupełnienia czatów opartych na LLM. Twoim celem jest stworzenie kompleksowego i przejrzystego planu wdrożenia, który deweloper może wykorzystać do prawidłowego i wydajnego wdrożenia usługi.
+
+Najpierw przejrzyj dostarczony stack technologiczny i zasady implementacji:
+
+<tech_stack>
+{{tech-stack}}
+</tech_stack>
+
+<implementation_rules>
+{{rules}}
+</implementation_rules>
+
+Teraz przeanalizuj dostarczone informacje i rozbij szczegóły implementacji. Zakończ ten proces w tagach <implementation_breakdown> wewnątrz bloku myślenia. Rozważ następujące kwestie:
+
+1. Wymień każdy kluczowy komponent usługi OpenRouter i jego cel.
+2. Dla każdego komponentu:
+a. Opisz szczegółowo jego funkcjonalność.
+b. Przeprowadź burzę mózgów na temat potencjalnych wyzwań związanych z wdrożeniem.
+c. Zaproponuj niezależne od technologii rozwiązania tych wyzwań.
+3. Wyraźnie zastanów się, jak włączyć każdy z poniższych elementów, wymieniając potencjalne metody lub podejścia:
+- Komunikat systemowy
+- Komunikat użytkownika
+- Response_format (schemat JSON)
+- Nazwa modelu
+- Parametry modelu (temperatura, max_tokens, top_p, frequency_penalty, presence_penalty)
+4. Uwzględnij kwestie obsługi błędów dla całej usługi, wymieniając potencjalne scenariusze błędów.
+5. Uwzględnij kwestie bezpieczeństwa dla całej usługi, zwracając uwagę na potencjalne luki w zabezpieczeniach i strategie ich ograniczania.
+
+Na podstawie przeprowadzonej analizy utwórz kompleksowy przewodnik implementacji. Przewodnik powinien być napisany w formacie Markdown i mieć następującą strukturę:
+
+1. Opis usługi
+2. Opis konstruktora
+3. Publiczne metody i pola
+4. Metody i pola prywatne
+5. Obsługa błędów
+6. Względy bezpieczeństwa
+7. Plan implementacji krok po kroku
+
+Upewnij się, że przewodnik:
+1. Jest niezależny od technologii, umożliwiając adaptację do różnych stosów technologicznych
+2. Obejmuje wszystkie istotne komponenty usługi OpenRouter
+3. Obejmuje obsługę błędów i najlepsze praktyki bezpieczeństwa
+4. Zawiera jasne instrukcje dotyczące implementacji kluczowych metod i funkcji
+5. Wyjaśnia, jak ustawić komunikat systemowy, komunikat użytkownika, response_format (schemat JSON), nazwę modelu i parametry modelu
+
+Użyj odpowiedniego formatowania Markdown dla lepszej czytelności. Końcowy wynik powinien składać się wyłącznie z przewodnika implementacji i nie powinien powielać ani powtarzać żadnej pracy wykonanej w sekcji podziału implementacji.
+
+Rozpocznij swoją odpowiedź od zawartości Markdown przewodnika implementacji.
