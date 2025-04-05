@@ -77,7 +77,7 @@ Upewnij się, że Twój plan jest zgodny z PRD, historyjkami użytkownika i uwzg
 
 Ostateczne wyniki powinny być w języku polskim i zapisane w pliku o nazwie .ai/{view-name}-view-implementation-plan.md. Nie uwzględniaj żadnej analizy i planowania w końcowym wyniku.
 
-Oto przykład tego, jak powinien wyglądać plik wyjściowy (treść jest zastępcza):
+Oto przykład tego, jak powinien wyglądać plik wyjściowy (treść jest do zastąpienia):
 
 ``markdown
 # Plan implementacji widoku [Nazwa widoku]
